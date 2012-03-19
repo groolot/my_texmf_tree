@@ -1,0 +1,109 @@
+%###########################################
+%		Packages
+%###########################################
+\ProvidesPackage{groolot_layout}
+% Packages generaux
+\usepackage[english,french]{babel}
+    \newcommand{\en}{\selectlanguage{english}}
+    \newcommand{\fr}{\selectlanguage{french}}
+
+\usepackage{svn}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[pdftex]{graphicx}
+\usepackage[usenames]{color}
+
+\usepackage{afterpage}
+
+\usepackage[french]{varioref} % References croisees qui vont bien
+
+\usepackage{verbatim}
+\usepackage[normalem]{ulem} % differents soulignements
+\usepackage{soul} % d'autres soulignements
+\usepackage[right]{eurosym} % Symbole euro \euro{}, ou avec valeur \EUR{123}
+
+\usepackage{enumerate} % Listes enumerees
+
+\usepackage{numprint} % Met en forme les nombres
+\usepackage{nbaseprt} % Affiche les nombres dans des bases
+
+\usepackage[bottom=2.5cm,top=3cm]{geometry}
+\usepackage[pdftex]{lscape}
+\usepackage{multirow} % Fusion de lignes
+\usepackage{dcolumn} % Alignement des colonnes d'une table selon le point decimal
+    \newcolumntype{.}{D{.}{.}{-1}}
+    \newcolumntype{,}{D{,}{,}{-1}}
+
+\usepackage{ifthen} % Package permettant de realiser des choses en fonction d'une condition
+    \newboolean{MONBOOL}
+    \setboolean{MONBOOL}{true}
+
+
+
+%\usepackage[french,tight]{minitoc} % pour la gestion des sommaires de section, pour les gros docus
+\usepackage{amsthm} % proof environnement
+%\usepackage{amsfonts}
+%\usepackage{amssymb}
+%\usepackage{xspace} % Ajout d'espace si besoin en fin de macro
+%\usepackage{longtable} % Package pour les long tableaux
+
+
+% Definition des couleurs personnelles
+\definecolor{DarkGreen}{rgb}{0,0.75,0}%
+\definecolor{DarkRed}{rgb}{0.5,0,0}%
+\definecolor{DarkBlue}{rgb}{0,0,0.75}%
+%%%%%%%%%
+
+% Package de gestion des codes sources et listings
+\usepackage{listings}
+\lstset{% general command to set parameter(s), to be included in document environnement
+	basicstyle=\scriptsize\ttfamily,%
+	keywordstyle=\color{DarkRed},%
+	stringstyle=\color{DarkBlue},%
+	identifierstyle=,%
+	commentstyle=\color{DarkGreen},%
+	numbers=left,%
+	frame=trBL,%
+	breaklines=true,%
+	%prebreak={ \textbackslash{}},%
+	%postbreak={..\space},%
+	breakatwhitespace=true,%
+	escapeinside={(*@}{@*)},%
+	extendedchars=false,%
+	}
+%%%%%%%%%
+
+\usepackage{xlop}
+\newcommand{\DivisionEuclidienneSuccessive}[2]{
+    \newif\ifcontinue
+    \newcount\divrank
+    \divrank=0%
+    \opcopy{#1}{dividende}%
+    \opcopy{#2}{diviseur}%
+    \continuetrue
+    \whiledo{\boolean{continue}}{
+        \continuefalse%
+        \opidiv*{dividende}{diviseur}{quotient}{reste}%
+        \par$ \opprint{dividende} = \opprint{diviseur} \times \opprint{quotient} + \opprint{reste} $
+        \opcopy{quotient}{dividende}
+        \advance\divrank by1
+        \opcmp{dividende}{0}%
+        \ifopgt \continuetrue \fi
+    }
+}
+
+
+%###########################################
+%		Quelques definitions
+%###########################################
+\author{
+	\begin{tabular}{p{6.5cm} r}
+		\multicolumn{2}{r}{version du \SVNDate, \REVISIONS}\\
+		\hline
+		\href{http://www.groolot.net}{Gr\'egory \bsc{David}} & \\
+		& \scriptsize{\url{http://www.bts-malraux.net/svn_trac/Gregory_DAVID/wiki}} \\
+		& \\
+		& \\
+	\end{tabular}
+}
+\date{}

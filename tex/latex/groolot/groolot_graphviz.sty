@@ -1,0 +1,143 @@
+% groolot_graphviz.sty
+% by $Author$
+% $Date$
+% $HeadURL$
+%
+% Based on graphviz.sty
+% by Mark Aufflick
+% 2006-03-25
+% mark@aufflick.com
+% http://mark.aufflick.com/
+%
+% based on graphviz.tex by Derek Rayside 2003
+
+% add the following lines to your preamble:
+
+% \usepackage[pdftex]{graphicx}
+% \usepackage{graphviz}
+
+% parameters to \GraphvizIT:
+% 1 - parameters for \includegraphics (optional; default value is "scale=1")
+% 2 - program to call (dot, neato, etc.)
+% 3 - graph or digraph
+% 4 - name of the (di)graph
+% 5 - body of the (di)graph
+% 6 - caption
+% 7 - label
+
+% assumes pdflatex. to modify this command for regular latex,
+% replace all .pdf with .ps, and the command becomes simply:
+% dot -Tps #4.dot
+
+\ProvidesPackage{groolot_graphviz}
+
+\newcommand{\GraphvizIT}[7][scale=1]{
+  \newwrite\dotfile
+  \immediate\openout\dotfile=#4.dot
+  \immediate\write\dotfile{#3 #4 {\string#5}}
+  \immediate\closeout\dotfile
+  \immediate\write18{bash -c "#2 -Tpdf -o#4.pdf #4.dot"}
+  \IfFileExists{#4.pdf}
+  % the pdf exists: include it
+  { \begin{figure}[htbp]
+      \centering
+      \begin{minipage}[c]{\linewidth}
+        \centering
+        \includegraphics[#1]{#4.pdf}
+        \caption{#6}
+        \label{#7}
+      \end{minipage}
+    \end{figure}
+  }
+  % the pdf was not created - show a hint
+  { \fbox{ \begin{tabular}{l}
+        The file \texttt{#4.pdf} hasn't been created from
+        \texttt{#4.dot} yet. \\
+        We attempted to create it with:\\
+        `\texttt{#2 -Tpdf -o#4.pdf #4.dot}' \\
+        but that seems not to have worked. You need to execute `\texttt{pdflatex}' with \\
+        the `\texttt{-shell-escape}' option. You need graphviz to be compiled with \\
+        the cairo lib.
+      \end{tabular}}
+  }
+}
+
+\newcommand{\digraph}[6][scale=1]{
+    \GraphvizIT[#1]{#2}{digraph}{#3}{#4}{#5}{#6}
+}
+
+\newcommand{\nondigraph}[6][scale=1]{
+    \GraphvizIT[#1]{#2}{graph}{#3}{#4}{#5}{#6}
+}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%        EXEMPLES          %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\digraph[angle=90,height=15cm]{dot}{exo1}{
+%                            graph [label="Chemin critiques : [E, J, B, F] et [E, G, H, A, F]",
+%								rankdir=LR,
+%								splines=True
+%							];
+%							node [shape=record];
+%							A	 [label="A | { 7 | 7 }"];
+%							F	 [label="F | { 10 | 10 }"];
+%							A -> F	 [label=3];
+%							C	 [label="C | { 10 | 11 }"];
+%							Fin	 [label="Fin | { 12 | 12 }"];
+%							C -> Fin	 [label=1];
+%							B	 [label="B | { 8 | 8 }"];
+%							B -> C	 [label=2];
+%							B -> F	 [label=2];
+%							E	 [label="E | { 0 | 0 }"];
+%							D	 [label="D | { 2 | 4 }"];
+%							E -> D	 [label=2];
+%							G	 [label="G | { 2 | 2 }"];
+%							E -> G	 [label=2];
+%							J	 [label="J | { 2 | 2 }"];
+%							E -> J	 [label=2];
+%							I	 [label="I | { 6 | 8 }"];
+%							D -> I	 [label=4];
+%							G -> B	 [label=2];
+%							H	 [label="H | { 4 | 4 }"];
+%							G -> H	 [label=2];
+%							F -> Fin	 [label=2];
+%							I -> C	 [label=3];
+%							H -> A	 [label=3];
+%							J -> B	 [label=6];
+%							Debut	 [label="Debut | { 0 | 0 }"];
+%							Debut -> E	 [label=0];
+%						}
+
+%\digraph[width=16cm]{dot}{schema}{
+%    graph [splines=yes,concentrate=yes,center=yes,fontname=Courier];
+%    edge [fontsize=14,fontname=Courier];
+%    subgraph clusterZYX {
+%        graph [label="Scop ZYX",labelloc=t,labeljust=r,fontsize=20];
+%        node [fontname=Courier,shape=component];
+%        repoNotepad [label="Depot SVN Notepad++"];
+%        repoVSL [label="Depot SVN VirtualStageLight"];
+%    };
+%    subgraph clusterXWVU {
+%        graph [label="SARL XWVU",labelloc=t,labeljust=r,fontsize=20];
+%        node [fontname=Courier,shape=component];
+%        repoKeePass [label="Depot SVN KeePass"];
+%        repoPersoUrsula [label="Depot SVN d'Ursula"];
+%        node [fontname=Courier,image="system-users.png",shape=none,labelloc=b];
+%        Ursula;
+%    };
+%    node [fontname=Courier,image="system-users.png",shape=none,labelloc=b];
+%        Zorra;
+%        Yann;
+%        Xavier;
+%        Winona;
+%        Valerie;
+%    Ursula -> repoPersoUrsula [label="personnel"];
+%    {Winona,Xavier,Ursula,Valerie} -> repoKeePass;
+%    {Yann,Xavier} -> repoVSL;
+%    {Zorra,Yann} -> repoNotepad;
+%}

@@ -1,0 +1,68 @@
+% Titre
+%
+% Fichier : $HeadURL$
+% Date    : $Date$
+% Auteur  : Gregory DAVID
+%%
+
+\documentclass[french]{beamer}
+
+\usepackage{groolot_beamer_layout}
+\usepackage{groolot_beamer_commands}
+
+\usetheme{Warsaw}
+
+\SVN $Id$
+\SVN $Date$
+\SVN $Revision$
+\SVN $Author$
+\SVN $HeadURL$
+
+\newcommand{\MONTITRE}{Titre ou sujet du document}
+\newcommand{\MONSOUSTITRE}{sous titre}
+\newcommand{\DISCIPLINE}{ma discipline}
+
+\title{\MONTITRE}
+\subtitle{\MONSOUSTITRE}
+\author[version du \SVNDate, \REVISIONS, \MOI]{\MOI}
+\institute{\DISCIPLINE}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\frame{
+    %\frametitle{Titre du slide}
+    \tableofcontents
+    %\tableofcontents[current]
+}
+
+\section[Petit titre]{Grand titre}
+\frame{
+    \tableofcontents[current]
+}
+\frame{
+    \frametitle{Le titre du slide}
+}
+\frame{
+    \frametitle{Associons des images}
+    N'oubliez pas que la taille d'une page est de 12,8cm x 9,6cm.
+    \begin{center}
+        \includegraphics[height=5cm]{data/image.png}
+    \end{center}
+}
+\frame{
+    \frametitle{Image en bo\^ite}
+    \begin{beamerboxesrounded}[lower=fg,shadow=true]{Une image titr\'ee :)}
+        \begin{center}
+            \includegraphics[height=5cm]{data/image.png}
+        \end{center}
+    \end{beamerboxesrounded}
+}
+\begin{frame}[containsverbatim]
+    \frametitle{Integration d'un listing}
+    \lstset{basicstyle=\tiny\ttfamily,language=TeX,numbers=left}
+    \lstinputlisting{data/fichier_source.tex}
+\end{frame}
+\end{document}
+

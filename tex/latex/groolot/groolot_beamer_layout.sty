@@ -1,0 +1,42 @@
+%###########################################
+%		Packages
+%###########################################
+% Packages generaux
+\usepackage[francais]{babel}
+\usepackage{color}
+\usepackage{svn}
+\usepackage[utf8]{inputenc}
+\usepackage[pdftex]{thumbpdf}
+
+% Definition des couleurs personnelles
+\definecolor{DarkGreen}{rgb}{0,0.75,0}%
+\definecolor{DarkRed}{rgb}{0.5,0,0}%
+\definecolor{DarkBlue}{rgb}{0,0,0.75}%
+%%%%%%%%%
+
+% Package de gestion des codes sources et listings
+\usepackage{listings}
+\lstset{% general command to set parameter(s), to be included in document environnement
+	basicstyle=\scriptsize\ttfamily,%
+	keywordstyle=\color{DarkRed},%
+	stringstyle=\color{DarkBlue},%
+	identifierstyle=,%
+	commentstyle=\color{DarkGreen},%
+	numbers=left,%
+	frame=trBL,%
+	breaklines=true,%
+	prebreak={ \textbackslash},%
+	%postbreak={..\space},%
+	breakatwhitespace=true,%
+	escapeinside={(*@}{@*)},%
+	extendedchars=false,%
+	}
+%%%%%%%%%
+
+% Packages de langue et symboles
+%\usepackage[english,francais]{babel}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+%\newcommand\en{\selectlanguage{english}}
+%\newcommand\fr{\selectlanguage{francais}}
+%%%%%%%%%

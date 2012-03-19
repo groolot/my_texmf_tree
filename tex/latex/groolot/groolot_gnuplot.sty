@@ -1,0 +1,45 @@
+% groolot_gnuplot.sty
+% by $Author$
+% $Date$
+% $HeadURL$
+%
+
+% parameters to \GnuplotIT:
+% 1 - filename and label of the plot
+% 2 - body of the plot
+
+% assumes pdflatex.
+
+\ProvidesPackage{groolot_gnuplot}
+
+\newcommand{\GnuplotIT}[2]{
+  \newwrite\gnuplotfile
+  \immediate\openout\gnuplotfile=#1.gnu
+  \immediate\write\gnuplotfile{set terminal latex; set output "#1.tex"; \string#2}
+  \immediate\closeout\gnuplotfile
+  \immediate\write18{bash -c "gnuplot #1.gnu"}
+  \IfFileExists{#1.tex}
+  % the tex exists: include it
+  { \input{#1} }
+  % the tex was not created - show a hint
+  { \fbox{ \begin{tabular}{l}
+        The file \texttt{#1.tex} hasn't been created from
+        \texttt{#1.gnu} yet. \\
+        We attempted to create it with:\\
+        `\texttt{gnuplot #1.gnu}' \\
+        but that seems not to have worked. You need to execute `\texttt{pdflatex}' with \\
+        the `\texttt{-shell-escape}' option. You need gnuplot to be in the path of the \\
+        current user.
+      \end{tabular}}
+  }
+}
+
+\newcommand{\gnuplot}[3]{%
+\begin{figure}
+    \begin{center}
+        \GnuplotIT{#1}{#2}
+    \end{center}
+    \caption{#3}
+    \label{plot_#1}
+\end{figure}%
+}
