@@ -65,9 +65,10 @@ do_anyway:
 	@echo "\033[32mCompilation de la bibliographie ...\033[0m"
 	-@$(BIBLIO_MAKER) "$*"
 	@echo "\033[32mSeconde compilation ...\033[0m"
-	$(PDF_PRODUCER) $(PDF_PRODUCERSILENTOPTIONS) "$(LATEX_SOURCES)" &> /dev/null
+#	$(PDF_PRODUCER) $(PDF_PRODUCERSILENTOPTIONS) "$(LATEX_SOURCES)" > /dev/null
+	$(PDF_PRODUCER) $(PDF_PRODUCERSILENTOPTIONS) "$(LATEX_SOURCES)"
 	@echo "\033[32mTroisieme compilation ...\033[0m"
-	$(PDF_PRODUCER) $(PDF_PRODUCERSILENTOPTIONS) "$(LATEX_SOURCES)" &> /dev/null
+	$(PDF_PRODUCER) $(PDF_PRODUCERSILENTOPTIONS) "$(LATEX_SOURCES)"
 
 %.clean: do_anyway
 	@echo "\033[31mNettoyage de $*.*...\033[0m"
