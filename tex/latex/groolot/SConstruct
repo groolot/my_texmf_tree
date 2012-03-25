@@ -1,0 +1,37 @@
+import os
+import re
+
+env = Environment(ENV=os.environ)
+
+env['PDFLATEXFLAGS']="-shell-escape"
+
+# def main_latex_scan(node, env, path):
+#     contents = node.get_text_contents()
+#     print "Node : ",str(node)
+#     if main_document_re.search(contents) == None:
+#         print "Pas de document principal."
+#         Exit("=> aucun fichier avec \"\\documentclass{\"")
+#     else:
+#         print "Document principal : %s" % str(node)
+#         pdfOutput = env.PDF(source=str(node))
+#         Depends(pdfOutput,formalisons)
+#         return [str(node)]
+#
+# mainLaTeXscan = Scanner(function = main_latex_scan,
+#                         skeys = ['.tex','.latex'])
+# env.Append(SCANNERS = mainLaTeXscan)
+
+texformalizer = Builder(action='texformalize $SOURCES')
+env.Append(BUILDERS = {'TeXFormalizer' : texformalizer})
+formalisons = env.TeXFormalizer(source=Glob('*.tex'))
+Depends(formalisons,Glob('*.tex'))
+
+main_document_re = re.compile(r'\\begin\{document\}')
+for file in Glob('*.tex'):
+    fileContent = file.get_text_contents()
+    if main_document_re.search(fileContent) == None:
+        print str(file)," n'est pas un document principal."
+    else:
+        print "Document principal : %s" % str(file)
+        pdfOutput = env.PDF(source=str(file))
+        Depends(pdfOutput,formalisons)
