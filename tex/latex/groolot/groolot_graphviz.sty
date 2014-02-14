@@ -1,7 +1,4 @@
 % groolot_graphviz.sty
-% by $Author$
-% $Date$
-% $HeadURL$
 %
 % Based on graphviz.sty
 % by Mark Aufflick
@@ -40,13 +37,15 @@
   \IfFileExists{#4.pdf}
   % the pdf exists: include it
   { \begin{figure}[htbp]
-      \centering
-      \begin{minipage}[c]{\linewidth}
-        \centering
-        \includegraphics[#1]{#4.pdf}
-        \caption{#6}
-        \label{#7}
-      \end{minipage}
+        \fbox{
+          \centering
+          \begin{minipage}[c]{\linewidth}
+              \centering
+              \includegraphics[#1]{#4.pdf}
+              \caption{#6}
+              \label{#7}
+          \end{minipage}
+        }
     \end{figure}
   }
   % the pdf was not created - show a hint
