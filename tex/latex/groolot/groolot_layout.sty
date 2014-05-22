@@ -16,6 +16,8 @@
 
 \usepackage[backend=bibtex8,backref=true]{biblatex}
 \addbibresource{groolot_bibliographie.bib}
+\defbibcheck{online}{\iffieldundef{url}{\skipentry}{}}
+\defbibcheck{notonline}{\iffieldundef{url}{}{\skipentry}}
 
 \usepackage{afterpage}
 

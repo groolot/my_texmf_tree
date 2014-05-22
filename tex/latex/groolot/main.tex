@@ -62,9 +62,11 @@
 
 	\section*{Deuxi\`eme section}
 
-\bibliographystyle{plainurl}
-\bibliography{groolot_bibliographie}
-\nocite{*}
+% References bibliographiques
+\newpage
+\printbibheading
+\printbibliography[nottype=online,check=notonline,heading=subbibliography,title={Bibliographiques}]
+\printbibliography[check=online,heading=subbibliography,title={Webographiques}]
 
 
 % Licence
