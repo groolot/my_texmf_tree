@@ -10,11 +10,12 @@
 \usepackage{svn}
 \usepackage{gitinfo}
 \usepackage[utf8]{inputenc}
+\usepackage{csquotes}
 \usepackage[T1]{fontenc}
 \usepackage[pdftex]{graphicx}
 \usepackage[usenames]{color}
 
-\usepackage[backend=bibtex8,backref=true]{biblatex}
+\usepackage[backend=bibtex8,backref=true,defernumbers=true]{biblatex}
 \addbibresource{groolot_bibliographie.bib}
 \defbibcheck{online}{\iffieldundef{url}{\skipentry}{}}
 \defbibcheck{notonline}{\iffieldundef{url}{}{\skipentry}}
@@ -35,6 +36,7 @@
 
 \usepackage[bottom=2.5cm,top=3cm]{geometry}
 \usepackage[pdftex]{lscape}
+\usepackage{array}
 \usepackage{multirow} % Fusion de lignes
 \usepackage{dcolumn} % Alignement des colonnes d'une table selon le point decimal
     \newcolumntype{.}{D{.}{.}{-1}}
