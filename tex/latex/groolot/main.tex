@@ -22,10 +22,9 @@
 	pdftoolbar=true,%
 	pdfpagelabels=true,%
 	pdftitle={\MONTITRE},%
-	pdfauthor={Gr\'egory DAVID},%
+	pdfauthor={Grégory DAVID},%
 	pdfsubject={\MONSOUSTITRE},%
 	pdfpagelayout={OneColumn},%
-	plainpages=true,%
 	pdfstartview=FitH%
 ]{hyperref}
 
@@ -40,44 +39,32 @@
 %\printanswers\groolotPhiligranne{CORRECTION}
 
 \begin{document}
-	\begin{titlepage}
-		% Page de titre
-		\maketitle
-	\end{titlepage}
+% Page de titre
+\maketitle
 
 % Copyright
 \include{copyright}
 
-	% Contenu
-	\HEADER{\MONTITRE}{\DISCIPLINE}
-		%\pointsinrightmargin
-		%\pointsdroppedatright
-		%\marginpointname{ \points}
-		%\bracketedpoints
-		%\totalformat{Question~\thequestion~:~[\totalpoints~\points]}
-		%\addpoints
-		%\qformat{Question \thequestion\dotfill\emph{(\pointsofquestion{\arabic{question}} \points)}}
+% Contenu
+\HEADER{\MONTITRE}{\DISCIPLINE}
+% \pointsinrightmargin
+% \pointsdroppedatright
+% \marginpointname{ \points}
+% \bracketedpoints
+% \totalformat{Question~\thequestion~:~[\totalpoints~\points]}
+% \addpoints
+% \qformat{Question
+% \thequestion\dotfill\emph{(\pointsofquestion{\arabic{question}}
+% \points)}}
 
-	\section*{Premi\`ere section}
+\section*{Premi\`ere section}
 
-	\section*{Deuxi\`eme section}
+\section*{Deuxi\`eme section}
 
 % References bibliographiques
-\newpage
-\printbibheading
+\newpage \printbibheading
 \printbibliography[nottype=online,check=notonline,heading=subbibliography,title={Bibliographiques}]
 \printbibliography[check=online,heading=subbibliography,title={Webographiques}]
-
-
-% Licence
-\include{licence}
-
-% Fin du document
-
-\HEADER{\href{http://www.latex-project.org/}{\LaTeXe}}{}
-\vspace*{\fill}
-Ce document a \'et\'e r\'edig\'e et mis en forme en \href{http://www.latex-project.org/}{\LaTeXe}.
-\vspace*{\fill}
 
 \end{document}
 

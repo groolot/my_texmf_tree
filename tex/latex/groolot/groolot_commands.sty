@@ -201,23 +201,23 @@
 
 \usepackage{eso-pic}
 \newcommand{\groolotPhiligranne}[1]{%
-    \makeatletter%
-    \AddToShipoutPictureBG{%
-        \AtTextCenter{%
-            \makebox(0,0)[c]{%
-                \resizebox{\textwidth}{!}{%
-                    \rotatebox{25}{%
-                        \texttt{%
-                            \textbf{%
-                                \textcolor[rgb]{1,0.5,0.5}{#1}%
-                            }%
-                        }%
-                    }%
-                }%
+  \makeatletter%
+  \AddToShipoutPictureBG{%
+    \AtTextCenter{%
+      \makebox(0,0)[c]{%
+        \resizebox{\textwidth}{!}{%
+          \rotatebox{25}{%
+            \texttt{%
+              \textbf{%
+                \textcolor[rgb]{1,0.5,0.5}{#1}%
+              }%
             }%
+          }%
         }%
+      }%
     }%
-    \makeatother%
+  }%
+  \makeatother%
 }
 
 %###########################################
@@ -232,16 +232,13 @@
 % #5 = label de l'element
     \begin{figure}
         \centering
-        %\fbox{
             \begin{minipage}[c]{#1}
                 \centering
                 \includegraphics[#3]{#2}
                 \caption{#4}
                 \label{#5}
             \end{minipage}
-        %}
     \end{figure}
-    %\afterpage{\clearpage}
 }
 \newcommand{\imageBoxed}[5][\textwidth]{%
 % #1 = largeur de la minipage
@@ -283,3 +280,23 @@
     \end{table}
     %\afterpage{\clearpage}
 }
+
+\newcommand{\tableauSized}[5]{%
+% #1 = parametres des colonnes
+% #2 = contenu du tableau
+% #3 = le texte du caption
+% #4 = label de l'element
+% #5 = largeur du tableau final
+    \begin{table}
+        \centering
+        \resizebox{#5}{!} {
+          \begin{tabular}{#1}
+              #2
+          \end{tabular}
+        }
+        \caption{#3}
+        \label{#4}
+    \end{table}
+    %\afterpage{\clearpage}
+}
+
