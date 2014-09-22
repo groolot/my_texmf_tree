@@ -11,7 +11,7 @@
 % add the following lines to your preamble:
 
 % \usepackage[pdftex]{graphicx}
-% \usepackage{graphviz}
+% \usepackage{groolot_graphviz}
 
 % parameters to \GraphvizIT:
 % 1 - parameters for \includegraphics (optional; default value is "scale=1")
@@ -33,11 +33,11 @@
   \immediate\openout\dotfile=#4.dot
   \immediate\write\dotfile{#3 #4 {\string#5}}
   \immediate\closeout\dotfile
-  \immediate\write18{bash -c "#2 -Tpdf -o#4.pdf #4.dot"}
+  \immediate\write18{bash -c "#2 -Gimagepath="$HOME/texmf/tex/latex/groolot/icons" -Tpdf -o#4.pdf #4.dot"} %$
   \IfFileExists{#4.pdf}
   % the pdf exists: include it
   { \begin{figure}[htbp]
-        \fbox{
+%        \fbox{
           \centering
           \begin{minipage}[c]{\linewidth}
               \centering
@@ -45,7 +45,7 @@
               \caption{#6}
               \label{#7}
           \end{minipage}
-        }
+%        }
     \end{figure}
   }
   % the pdf was not created - show a hint
