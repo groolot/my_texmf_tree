@@ -7,33 +7,23 @@
     \newcommand{\en}{\selectlanguage{english}}
     \newcommand{\fr}{\selectlanguage{french}}
 
-\usepackage{svn}
 \usepackage{gitinfo}
 \usepackage[utf8]{inputenc}
 \usepackage{csquotes}
 \usepackage[T1]{fontenc}
 \usepackage[pdftex]{graphicx}
 \usepackage[usenames]{color}
-
+\usepackage{fancyhdr}
 \usepackage[backend=bibtex8,backref=true,defernumbers=true]{biblatex}
 \addbibresource{groolot_bibliographie.bib}
 \defbibcheck{online}{\iffieldundef{url}{\skipentry}{}}
 \defbibcheck{notonline}{\iffieldundef{url}{}{\skipentry}}
-
 \usepackage{afterpage}
-
 \usepackage[french]{varioref} % References croisees qui vont bien
-
-\usepackage{verbatim}
-\usepackage[normalem]{ulem} % differents soulignements
-\usepackage{soul} % d'autres soulignements
 \usepackage[right]{eurosym} % Symbole euro \euro{}, ou avec valeur \EUR{123}
-
 \usepackage{enumerate} % Listes enumerees
-
 \usepackage{numprint} % Met en forme les nombres
 \usepackage{nbaseprt} % Affiche les nombres dans des bases
-
 \usepackage[bottom=2.5cm,top=3cm]{geometry}
 \usepackage[pdftex]{lscape}
 \usepackage{array}
@@ -41,20 +31,12 @@
 \usepackage{dcolumn} % Alignement des colonnes d'une table selon le point decimal
     \newcolumntype{.}{D{.}{.}{-1}}
     \newcolumntype{,}{D{,}{,}{-1}}
-
 \usepackage{ifthen} % Package permettant de realiser des choses en fonction d'une condition
     \newboolean{MONBOOL}
     \setboolean{MONBOOL}{true}
-
-
-
-%\usepackage[french,tight]{minitoc} % pour la gestion des sommaires de section, pour les gros docus
 \usepackage{amsthm} % proof environnement
 %\usepackage{amsfonts}
 %\usepackage{amssymb}
-%\usepackage{xspace} % Ajout d'espace si besoin en fin de macro
-%\usepackage{longtable} % Package pour les long tableaux
-
 
 % Definition des couleurs personnelles
 \definecolor{DarkGreen}{rgb}{0,0.75,0}%
@@ -65,7 +47,7 @@
 % Package de gestion des codes sources et listings
 \usepackage{listings}
 \lstset{% general command to set parameter(s), to be included in document environnement
-	basicstyle=\scriptsize\ttfamily,%
+	basicstyle=\normalsize\ttfamily,%
 	keywordstyle=\color{DarkRed},%
 	stringstyle=\color{DarkBlue},%
 	identifierstyle=,%
@@ -105,13 +87,13 @@
 %		Quelques definitions
 %###########################################
 \author{
-	\begin{tabular}{p{7.5cm} r}
-		\multicolumn{2}{r}{version en date du \gitAuthorIsoDate, \REVISIONS}\\
-		\hline
-		\href{mailto:groolot@groolot.net}{Gr\'egory \bsc{David}} & \\
-		& Lycée André \bsc{Malraux}\\
-		& 3 rue de Beau Soleil\\
-                & 72700 Allonnes\\
-	\end{tabular}
+  \begin{tabular}{p{7.5cm} r}
+      \multicolumn{2}{r}{version en date du \gitAuthorIsoDate, \REVISIONS}\\
+      \hline
+      \href{mailto:groolot@groolot.net}{Gr\'egory \bsc{David}} & \\
+      & Lycée André \bsc{Malraux}\\
+      & 3 rue de Beau Soleil\\
+      & 72700 Allonnes\\
+  \end{tabular}
 }
 \date{}
