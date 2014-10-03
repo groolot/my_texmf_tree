@@ -33,7 +33,7 @@
   \immediate\openout\dotfile=#4.dot
   \immediate\write\dotfile{#3 #4 {\string#5}}
   \immediate\closeout\dotfile
-  \immediate\write18{bash -c "#2 -Gimagepath="$HOME/texmf/tex/latex/groolot/icons" -Tpdf -o#4.pdf #4.dot"} %$
+  \immediate\write18{bash -c "#2 -Gimagepath="$HOME/texmf/tex/latex/groolot/icons" -Gcharset=latin1 -Tpdf -o#4.pdf #4.dot"} %$
   \IfFileExists{#4.pdf}
   % the pdf exists: include it
   { \begin{figure}[htbp]

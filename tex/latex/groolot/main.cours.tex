@@ -1,0 +1,56 @@
+% Titre
+%
+% Auteur  : Gregory DAVID
+%%
+
+\documentclass[12pt,a4paper,oneside,titlepage,final]{article}
+
+\usepackage{groolot_layout}
+\usepackage{groolot_commands}
+\usepackage{groolot_glossaire}
+
+\newcommand{\MONTITRE}{Titre ou sujet du document}
+\newcommand{\MONSOUSTITRE}{sous titre}
+\newcommand{\DISCIPLINE}{ma discipline}
+
+\usepackage[%
+	pdftex,%
+	pdfpagelabels=true,%
+	pdftitle={\MONTITRE},%
+	pdfauthor={Grégory DAVID},%
+	pdfsubject={\MONSOUSTITRE}%
+]{hyperref}
+
+\title{
+	\begin{tabular}{p{3.5cm} r}
+		& {\Huge {\bf \MONTITRE}} \\
+		& {\huge \MONSOUSTITRE} \\
+		& {\large \DISCIPLINE} \\
+	\end{tabular}
+}
+
+%\printanswers\groolotPhiligranne{CORRECTION}
+
+\begin{document}
+% Page de titre
+\maketitle
+
+% Copyright
+\include{copyright}
+
+% Contenu
+\HEADER{\MONTITRE}{\DISCIPLINE}
+
+\section*{Premi\`ere section}
+
+\section*{Deuxi\`eme section}
+
+% References bibliographiques
+\newpage \printbibheading
+\printbibliography[nottype=online,check=notonline,heading=subbibliography,title={Bibliographiques}]
+\printbibliography[check=online,heading=subbibliography,title={Webographiques}]
+
+\printglossaries
+
+\end{document}
+
