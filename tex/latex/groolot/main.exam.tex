@@ -1,11 +1,11 @@
-% Devoir Numération & Codage
+% Devoir Titre
 %
 % Auteur  : Gregory DAVID
 %%
 
 \documentclass[12pt,a4paper,oneside,titlepage,final]{exam}
 
-\newcommand{\MONTITRE}{Num\'eration et codage}
+\newcommand{\MONTITRE}{Titre}
 \newcommand{\MONSOUSTITRE}{Devoir Surveill\'e}
 \newcommand{\DISCIPLINE}{\glsentrytext{SiUN} -- \glsentrydesc{SiUN}}
 \usepackage[%
@@ -53,6 +53,7 @@
 }
 
 \printanswers\groolotPhiligranne{CORRECTION}
+
 \renewcommand{\HEADER}[2]{
 	\pagestyle{headandfoot}
 	\thispagestyle{headandfoot}
@@ -64,25 +65,19 @@
 }
 
 \begin{document}
-	% Page de titre
-	\maketitle
+\maketitle
 
-	% Contenu
-	\HEADER{\MONTITRE}{\DISCIPLINE}
-	    \extrawidth{0.5cm}
-		\pointsinrightmargin
-		%\pointsdroppedatright
-		\marginpointname{~\points}
-		\bracketedpoints
-		%\totalformat{Question~\thequestion~:~[\totalpoints~\points]}
-		\addpoints
-		\qformat{Question \thequestion\dotfill\emph{(\pointsofquestion{\arabic{question}} \points)}}
-                \bonusqformat{Question \thequestion\dotfill\emph{(\bonuspointsofquestion{\arabic{question}} \points)}}
-		\setlength\answerlinelength{10cm}
+\HEADER{\MONTITRE}{\DISCIPLINE} \extrawidth{0.5cm}
+\pointsinrightmargin \marginpointname{~\points} \bracketedpoints
+\addpoints \qformat{Question
+  \thequestion\dotfill\emph{(\pointsofquestion{\arabic{question}}
+    \points)}} \bonusqformat{Question
+  \thequestion\dotfill\emph{(\bonuspointsofquestion{\arabic{question}}
+    \points)}} \setlength\answerlinelength{10cm}
 
 \vspace*{\fill}
 
-    % Affichage de la boite d'information
+% Boite d'information
 \begin{center}
     \fbox{\fbox{\parbox{5.5in}{\centering Ce dossier est constitu\'e
           d'un ensemble de \textbf{\numquestions\ questions} comptant
@@ -96,13 +91,10 @@
             ordinateur, etc.) est INTERDIT pour ce devoir.}  }}}
 \end{center}
 
-% Affichage du tableau d'\'evaluation
+% Affichage du tableau d'évaluation
 \begin{center}
-    \chqword{Questions :}
-    \chpword{Points :}
-    \chbpword{Points bonus :}
-    \chsword{\textbf{Évaluation :}}
-    \chtword{\textbf{Somme}}
+    \chqword{Questions :} \chpword{Points :} \chbpword{Points bonus :}
+    \chsword{\textbf{Évaluation :}} \chtword{\textbf{Somme}}
     % \gradetable[h][questions]
     \combinedgradetable[h]
 \end{center}
@@ -114,291 +106,14 @@
 \begin{questions}
     \question[1] Présentation, respect des formalismes.
 
-    \question Donner et \gls{demontrer} démontrer la conversion de base des valeurs
-    suivantes :
-    \begin{parts}
-        \part[1]
-        $ \overline{2681}_{10} = \overline{???}_{2} $
-        \begin{solution}[6cm]
-            $ \overline{2681}_{10} = \overline{101001111001}_{2} $
-            \DivisionEuclidienneSuccessive{2681}{2}
-        \end{solution}
+    \question Donner et \gls{demontrer} blabla
 
-        \part[1]
-        $ \overline{53}_{10} = \overline{???}_{2} $
-        \begin{solution}[6cm]
-            $ \overline{53}_{10} = \overline{110101}_{2} $
-            \DivisionEuclidienneSuccessive{53}{2}
-        \end{solution}
-        
-        \part[1]
-        $ \overline{10000101001}_{2} = \overline{???}_{10} $
-        \begin{solution}[6cm]
-            $ \overline{10000101001}_{2} = \overline{1 \times 2^{10} +
-              1 \times 2^{5} + 1 \times 2^{3} + 1 \times 2^{0}}_{10} $
-            \newline $ \overline{10000101001}_{2} =
-            \overline{1065}_{10} $
-        \end{solution}
-        
-        \part[1]
-        $ \overline{128}_{10} = \overline{???}_{16} $
-        \begin{solution}[6cm]
-            $ \overline{128}_{10} = \overline{80}_{16} $
-            \DivisionEuclidienneSuccessive{128}{16}
-        \end{solution}
-
-        \part[1]
-        $ \overline{136912}_{10} = \overline{???}_{16} $
-        \begin{solution}[6cm]
-            $ \overline{136912}_{10} = \overline{216D0}_{16} $
-            \DivisionEuclidienneSuccessive{136912}{16}
-        \end{solution}
-
-        \part[1]
-        $ \overline{101111}_{2} = \overline{???}_{16} $
-        \begin{solution}[6cm]
-            $ \overline{101111}_{2} = \overline{2F}_{16} $
-        \end{solution}
-
-        \part[1]
-        $ \overline{11111110}_{2} = \overline{???}_{16} $
-        \begin{solution}[6cm]
-            $ \overline{11111110}_{2} = \overline{FE}_{16} $
-        \end{solution}
-    \end{parts}
-
-    \question Réaliser, et démontrer, les calculs sur les nombres
-    binaires suivants :
-    \begin{parts}
-        \part L'addition
-        \begin{subparts}
-            \subpart[1] $ \overline{100111}_{2} + \overline{101}_{2} =
-            \overline{???}_{2}$
-            \begin{solution}[6cm]
-                \centering
-                \begin{tabular}{lr}
-                    & \texttt{100111} \\
-                    $ + $ & \texttt{101} \\ \hline
-                    & \texttt{101100} \\
-                \end{tabular}
-            \end{solution}
-
-            \subpart[1] $ \overline{111}_{2} + \overline{1}_{2} =
-            \overline{???}_{2}$
-            \begin{solution}[6cm]
-                \centering
-                \begin{tabular}{lr}
-                    & \texttt{111} \\
-                    $ + $ & \texttt{1} \\ \hline
-                    & \texttt{1000} \\
-                \end{tabular}
-            \end{solution}
-
-            \subpart[1] $ \overline{1010101}_{2} + \overline{111}_{2}
-            = \overline{???}_{2}$
-            \begin{solution}[6cm]
-                \centering
-                \begin{tabular}{lr}
-                    & \texttt{1010101} \\
-                    $ + $ & \texttt{111} \\ \hline
-                    & \texttt{1011100} \\
-                \end{tabular}
-            \end{solution}
-        \end{subparts}
-
-        \part La soustraction
-        \begin{subparts}
-            \subpart[1] $ \overline{10}_{2} - \overline{1}_{2} =
-            \overline{???}_{2}$
-            \begin{solution}[6cm]
-                \centering
-                \begin{tabular}{lr}
-                    & \texttt{10} \\
-                    $ - $ & \texttt{1} \\ \hline
-                    & \texttt{1} \\
-                \end{tabular}
-            \end{solution}
-
-            \subpart[1] $ \overline{111}_{2} - \overline{10}_{2} =
-            \overline{???}_{2}$
-            \begin{solution}[6cm]
-                \centering
-                \begin{tabular}{lr}
-                    & \texttt{111} \\
-                    $ - $ & \texttt{10} \\ \hline
-                    & \texttt{101} \\
-                \end{tabular}
-            \end{solution}
-
-            \subpart[1] $ \overline{1001001101}_{2} -
-            \overline{10111}_{2} = \overline{???}_{2}$
-            \begin{solution}[6cm]
-                \centering
-                \begin{tabular}{lr}
-                    & \texttt{1001001101} \\
-                    $ - $ & \texttt{10111} \\ \hline
-                    & \texttt{1000110110} \\
-                \end{tabular}
-            \end{solution}
-
-            \subpart[1] $ \overline{110011}_{2} - \overline{1100}_{2}
-            = \overline{???}_{2}$
-            \begin{solution}[6cm]
-                \centering
-                \begin{tabular}{lr}
-                    & \texttt{110011} \\
-                    $ - $ & \texttt{1100} \\ \hline
-                    & \texttt{100111} \\
-                \end{tabular}
-            \end{solution}
-
-            \subpart[1] $ \overline{10000}_{2} - \overline{1111}_{2} =
-            \overline{???}_{2}$
-            \begin{solution}[6cm]
-                \centering
-                \begin{tabular}{lr}
-                    & \texttt{10000} \\
-                    $ - $ & \texttt{1111} \\ \hline
-                    & \texttt{1} \\
-                \end{tabular}
-            \end{solution}
-        \end{subparts}
-
-        \part La multiplication
-        \begin{subparts}
-            \subpart[1] $ \overline{101011}_{2} \times
-            \overline{10}_{2} = \overline{???}_{2}$
-            \begin{solution}[6cm]
-                \centering
-                \begin{tabular}{lr}
-                    & \texttt{101011} \\
-                    $\times$ & \texttt{10} \\ \hline
-                    & \texttt{101011.} \\ \hline
-                    & \texttt{1010110} \\
-                \end{tabular}
-            \end{solution}
-
-            \subpart[1] $ \overline{101011}_{2} \times
-            \overline{1000}_{2} = \overline{???}_{2}$
-            \begin{solution}[6cm]
-                \centering
-                \begin{tabular}{lr}
-                    & \texttt{101011} \\
-                    $\times$ & \texttt{10000} \\ \hline
-                    & \texttt{101011....} \\ \hline
-                    & \texttt{1010110000} \\
-                \end{tabular}
-            \end{solution}
-
-            \subpart[1] $ \overline{101011}_{2} \times
-            \overline{10111}_{2} = \overline{???}_{2}$
-            \begin{solution}[6cm]
-                \centering
-                \begin{tabular}{lr}
-                    & \texttt{101011} \\
-                    $\times$ & \texttt{10111} \\ \hline
-                    & \texttt{101011} \\
-                    & \texttt{101011.} \\
-                    & \texttt{101011..} \\
-                    & \texttt{101011....} \\ \hline
-                    & \texttt{1111011101} \\
-                \end{tabular}
-            \end{solution}
-
-            \subpart[1] $ \overline{11111}_{2} \times
-            \overline{11111}_{2} = \overline{???}_{2}$
-            \begin{solution}[6cm]
-                \centering
-                \begin{tabular}{lr}
-                    & \texttt{11111} \\
-                    $\times$ & \texttt{11111} \\ \hline
-                    & \texttt{11111} \\
-                    & \texttt{11111.} \\
-                    & \texttt{11111..} \\
-                    & \texttt{11111...} \\
-                    & \texttt{11111....} \\ \hline
-                    & \texttt{1111000001} \\
-                \end{tabular}
-            \end{solution}
-        \end{subparts}
-    \end{parts}
-
-    \question[20] Donner, démontrer et vérifier la repr\'esentation
-    binaire du nombre d\'ecimal suivant sur \lstinline{32bits}, selon
-    la norme \texttt{\acrshort{IEEE} 754}\cite{IEEE754_WIKIPEDIA} :
-        $$ \overline{-8.75000095367431640625}_{10} = \overline{????????????????????????????????}_{2} $$
-        \begin{solution}[30cm]
-                $$ \overline{-8.75000095367431640625}_{10} = \overline{11000001000011000000000000000001}_{2} $$
-                \begin{proof}~\newline
-                    \begin{enumerate}
-                        \item conversion binaire de la partie
-                        enti\`ere :
-                    $$ \overline{8}_{10} = 1 \times 2^{3} = \overline{1000}_{2}$$
-                    \item conversion binaire de la partie d\'ecimale :
-                    \subitem la mantisse peut contenir
-                    \lstinline{23bits}, or la partie enti\`ere
-                    normalis\'ee occupe d\'ej\`a \lstinline{3bits} sur
-                    l'espace de la mantisse, il nous reste donc
-                    \lstinline{20bits} disponibles pour la partie
-                    d\'ecimale : $$ 0.75000095367431640625 \times
-                    2^{20} = 786433 $$ avec l'arrondi \`a l'entier le
-                    plus proche, \subitem nous n'avons plus qu'\`a
-                    convertir la valeur $ \overline{786433}_{10} $ en
-                    binaire \DivisionEuclidienneSuccessive{786433}{2}
-                    \item r\'ecriture compl\`ete du nombre d\'ecimale
-                    en binaire
-                        $$ \overline{-8.75000095367431640625}_{10} = \overline{-1000.11000000000000000001}_{2}$$
-                        \item le nombre n'est pas normalis\'e :
-                        normalisation\newline on veut le nombre sous
-                        la forme $ S \times 1.M \times 2^{e} $
-                        \begin{multline}
-                            \overline{-1000.11000000000000000001}_{2}
-                            \\= \overline{-1 \times
-                              1.00011000000000000000001}_{2} \times
-                            2^{3}
-                        \end{multline}
-                        o\`u
-                $$ S = \overline{1}_{2} \textnormal{, car le signe est n\'egatif} $$
-                $$ e = 3 \Rightarrow E = e + 127 = 130 = \overline{10000010}_{2} $$
-                $$ M = \overline{00011000000000000000001}_{2} $$
-                \item vérification :
-                \begin{multline}
-                    \overline{-1000.11000000000000000001}_{2} \\= -
-                    (2^3 + 2^{-1} + 2^{-2} + 2^{-20}) \\= - (8 + 0.5
-                    +0.25+0.00000095367431640625) \\=
-                    \overline{-8.75000095367431640625}_{10}
-                \end{multline}
-            \end{enumerate}
-        \end{proof}
-    \end{solution}
-
-    \bonusquestion[1] La représentation binaire, selon la norme
-    \texttt{\acrshort{IEEE} 754} sur \lstinline{32bits}, du nombre précédent ($ -8.75000095367431640625 $)
-    est-elle (cocher une seule solution) :
+    \bonusquestion[1] (cocher une seule solution) :
     \begin{checkboxes}
-        \CorrectChoice exacte
-        \choice approximée
-        \choice impossible sur \lstinline{32bits}
-        \choice impossible sur \lstinline{64bits}
-        \choice improbable sur \lstinline{32bits}
-        \choice improbable sur \lstinline{64bits}
-        \choice vous me fatiguez avec vos questions
+        \CorrectChoice exacte \choice approximée \choice vous me
+        fatiguez avec vos questions
     \end{checkboxes}
 
-    \bonusquestion[2] Expliquer pourquoi.
-    \begin{solutionorlines}[10cm]
-        La représentation de la valeur décimale en binaire est exacte
-        car c'est une somme exacte de puissances de 2.
-        $$ -(2^3 + 2^{-1} + 2^{-2} + 2^{-20}) = - (8 +0.5+0.25+0.00000095367431640625) $$
-        En effet, lors du codage en binaire de la partie décimale du
-        nombre $$ -8.75000095367431640625 $$ il n'a pas été nécessaire
-        de faire un arrondi quelconque, sur les \lstinline{20bits}
-        restant de la mantisse à notre disposition.
-
-        Ainsi, ce nombre là \textbf{a une représentation exacte} en
-        binaire selon la norme \texttt{\acrshort{IEEE} 754} sur
-        \lstinline{32bits}.
-    \end{solutionorlines}
 \end{questions}
 
 \printbibheading
