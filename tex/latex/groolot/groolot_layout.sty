@@ -13,9 +13,11 @@
 \usepackage[T1]{fontenc}
 \usepackage[pdftex]{graphicx}
 \usepackage[usenames]{color}
+\makeatletter
 \@ifclassloaded{exam}%
-  {}%
+  {\def\examclassloaded{}}%
   {\usepackage{fancyhdr}}%
+\makeatother
 \usepackage[backend=bibtex8,backref=true,defernumbers=true]{biblatex}
 \addbibresource{groolot_bibliographie.bib}
 \defbibcheck{online}{\iffieldundef{url}{\skipentry}{}}

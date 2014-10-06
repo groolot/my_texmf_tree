@@ -11,22 +11,30 @@
 \newcommand{\MAILGREGORY}{\href{mailto:groolot@groolot.net}{\MOI}}
 
 \newcommand{\HEADER}[2]{
-\@ifclassloaded{exam}%
+\makeatletter
+\@ifundefined{examclassloaded}%
 % then
-  {
-    \pagestyle{headandfoot}
-    \thispagestyle{headandfoot}
-  }%
-  % else
+% FANCYHDR
   {
     \pagestyle{fancy}
     \thispagestyle{fancy}
+    \renewcommand{\headrulewidth}{0.4pt}
+    \renewcommand{\footrulewidth}{0.4pt}
+    \rhead{\MAILGREGORY}
+    \lhead{\bsc{#1}}
+    \lfoot{#2}\cfoot{}\rfoot{\thepage}
+  }%
+  % else
+  % EXAM HEADANDFOOT
+  {
+    \pagestyle{headandfoot}
+    \thispagestyle{headandfoot}
+    \header{\MAILGREGORY}{}{\textsc{#1}}
+    \headrule
+    \footer{#2}{}{\thepage}
+    \footrule
   }
-	\rhead{\MAILGREGORY}
-	\lhead{\bsc{#1}}
-	\lfoot{#2}\cfoot{}\rfoot{\thepage}
-        \renewcommand{\headrulewidth}{0.4pt}
-        \renewcommand{\footrulewidth}{0.4pt}
+\makeatother
 }
 
 \newcommand{\REVISIONS}{\scriptsize r\'evision \gitAbbrevHash{}}
