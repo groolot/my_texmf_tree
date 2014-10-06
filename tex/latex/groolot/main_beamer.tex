@@ -1,7 +1,5 @@
 % Titre
 %
-% Fichier : $HeadURL$
-% Date    : $Date$
 % Auteur  : Gregory DAVID
 %%
 
@@ -9,22 +7,15 @@
 
 \usepackage{groolot_beamer_layout}
 \usepackage{groolot_beamer_commands}
-
+\usepackage{groolot_glossaire}
 \usetheme{Warsaw}
-
-\SVN $Id$
-\SVN $Date$
-\SVN $Revision$
-\SVN $Author$
-\SVN $HeadURL$
-
 \newcommand{\MONTITRE}{Titre ou sujet du document}
 \newcommand{\MONSOUSTITRE}{sous titre}
 \newcommand{\DISCIPLINE}{ma discipline}
 
 \title{\MONTITRE}
 \subtitle{\MONSOUSTITRE}
-\author[version du \SVNDate, \REVISIONS, \MOI]{\MOI}
+\author[version en date du \gitAuthorIsoDate, \REVISIONS, \MOI]{\MOI}
 \institute{\DISCIPLINE}
 \date{\today}
 
@@ -46,7 +37,7 @@
 }
 \frame{
     \frametitle{Associons des images}
-    N'oubliez pas que la taille d'une page est de 12,8cm x 9,6cm.
+    Ne pas oublier que la taille d'une page est de 12,8cm x 9,6cm.
     \begin{center}
         \includegraphics[height=5cm]{data/image.png}
     \end{center}
@@ -62,7 +53,7 @@
 \begin{frame}[containsverbatim]
     \frametitle{Integration d'un listing}
     \lstset{basicstyle=\tiny\ttfamily,language=TeX,numbers=left}
-    \lstinputlisting{data/fichier_source.tex}
+    \lstinputlisting{main_beamer.tex}
 \end{frame}
 \end{document}
 

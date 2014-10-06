@@ -5,10 +5,6 @@
 
 \documentclass[12pt,a4paper,oneside,titlepage,final]{article}
 
-\usepackage{groolot_layout}
-\usepackage{groolot_commands}
-\usepackage{groolot_glossaire}
-
 \newcommand{\MONTITRE}{Titre ou sujet du document}
 \newcommand{\MONSOUSTITRE}{sous titre}
 \newcommand{\DISCIPLINE}{ma discipline}
@@ -17,16 +13,20 @@
 	pdftex,%
 	pdfpagelabels=true,%
 	pdftitle={\MONTITRE},%
-	pdfauthor={Grégory DAVID},%
-	pdfsubject={\MONSOUSTITRE}%
+	pdfauthor={Gr\'egory DAVID},%
+	pdfsubject={\MONSOUSTITRE},%
+        colorlinks,%
 ]{hyperref}
+\usepackage{groolot_layout}
+\usepackage{groolot_commands}
+\usepackage{groolot_glossaire}
 
 \title{
-	\begin{tabular}{p{3.5cm} r}
+	\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lr}
 		& {\Huge {\bf \MONTITRE}} \\
 		& {\huge \MONSOUSTITRE} \\
 		& {\large \DISCIPLINE} \\
-	\end{tabular}
+	\end{tabular*}
 }
 
 %\printanswers\groolotPhiligranne{CORRECTION}
