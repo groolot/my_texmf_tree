@@ -168,31 +168,6 @@ function helptext
 -EOF-
 }
 
-function create_project
-{
-#	-----------------------------------------------------------------------
-#	Function to create the project from the template
-#		Accepts 1 argument:
-#			output directory
-#	-----------------------------------------------------------------------
-    OUTPUT=$1
-	if [ "${OUTPUT}" = "" ]; then
-		error_exit "You must specify an output directory"
-	fi
-	if [ ! -d ${TEMPLATE_DIR} ]; then
-	   error_exit "The specified template directory ${TEMPLATE_DIR} does not exist"
-	fi
-
-	if [ ! -d ${OUTPUT} ]; then
-        mkdir -p ${OUTPUT} || error_exit "The output directory $1 can not be created"
-    else
-        if [ ! -w ${OUTPUT} ]; then
-	       error_exit "The specified output directory $1 is not writable"
-	   fi
-    fi
-    git add ${OUTPUT}/*.tex
-}
-
 function create_cours_project
 {
 #	-----------------------------------------------------------------------
@@ -246,12 +221,11 @@ function create_exam_project
 	   fi
     fi
 #    for file_template in main licence copyright ; do
-    for file_template in main ; do
+    for file_template in main.exam ; do
         if [ ! -f ${OUTPUT}/${file_template}.tex ]; then
             cp -Rfv ${TEMPLATE_DIR}/${file_template}.tex ${OUTPUT}/ || error_exit "The copy of the ${file_template} has not been reached"
         fi
     done
-    create_project ${OUTPUT}
 }
 
 function create_beamer_project
@@ -281,7 +255,6 @@ function create_beamer_project
             cp -Rfv ${TEMPLATE_DIR}/${file_template}.tex ${OUTPUT}/ || error_exit "The copy of the ${file_template} has not been reached"
         fi
     done
-    create_project ${OUTPUT}
 }
 
 #	-------------------------------------------------------------------
@@ -327,9 +300,6 @@ while getopts ":he:b:" opt; do
 		exit 1
 	esac
 done
-
-
-##### Main Logic #####
 
 graceful_exit
 
