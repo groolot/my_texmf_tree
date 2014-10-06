@@ -11,8 +11,17 @@
 \newcommand{\MAILGREGORY}{\href{mailto:groolot@groolot.net}{\MOI}}
 
 \newcommand{\HEADER}[2]{
-	\pagestyle{fancy}
-	\thispagestyle{fancy}
+\@ifclassloaded{exam}%
+% then
+  {
+    \pagestyle{headandfoot}
+    \thispagestyle{headandfoot}
+  }%
+  % else
+  {
+    \pagestyle{fancy}
+    \thispagestyle{fancy}
+  }
 	\rhead{\MAILGREGORY}
 	\lhead{\bsc{#1}}
 	\lfoot{#2}\cfoot{}\rfoot{\thepage}
