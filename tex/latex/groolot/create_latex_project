@@ -285,7 +285,7 @@ if [ "$1" = "--help" ]; then
 	graceful_exit
 fi
 
-while getopts ":he:b:" opt; do
+while getopts ":he:b:c:" opt; do
 	case $opt in
 	    c ) create_cours_project $OPTARG
 		graceful_exit ;;
