@@ -50,8 +50,10 @@
 
 % Package de gestion des codes sources et listings
 \usepackage{listings}
+\lstdefinestyle{groolotNormal}{basicstyle=\normalsize\ttfamily}
+\lstdefinestyle{groolotScript}{basicstyle=\scriptsize\ttfamily}
 \lstset{% general command to set parameter(s), to be included in document environnement
-	basicstyle=\normalsize\ttfamily,%
+	style=groolotNormal,%
 	keywordstyle=\color{DarkRed},%
 	stringstyle=\color{DarkBlue},%
 	identifierstyle=,%
