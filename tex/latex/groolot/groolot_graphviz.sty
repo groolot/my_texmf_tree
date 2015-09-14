@@ -61,6 +61,31 @@
   }
 }
 
+\newcommand{\GraphvizITBeamer}[6][scale=1]{ \newwrite\dotfile
+  \immediate\openout\dotfile=#4.dot \immediate\write\dotfile{#3 #4
+    {\string#5}} \immediate\closeout\dotfile \immediate\write18{bash
+    -c "#2
+    -Gimagepath="$HOME/texmf/tex/latex/icons" -Gcharset=latin1 -Tpdf
+    -o#4.pdf #4.dot"} %$
+  \IfFileExists{#4.pdf}
+  % the pdf exists: include it
+  {
+    \includegraphics[#1]{#4.pdf}
+    \label{#6}
+  }
+  % the pdf was not created - show a hint
+  { \fbox{ \begin{tabular}{l} The file \texttt{#4.pdf} hasn't been
+          created from
+             \texttt{#4.dot} yet. \\
+             We attempted to create it with:\\
+             `\texttt{#2 -Tpdf -o#4.pdf #4.dot}' \\
+             but that seems not to have worked. You need to execute `\texttt{pdflatex}' with \\
+             the `\texttt{-shell-escape}' option. You need graphviz to be compiled with \\
+             the cairo lib.
+           \end{tabular}}
+       }
+     }
+
 \newcommand{\digraph}[6][scale=1]{
     \GraphvizIT[#1]{#2}{digraph}{#3}{#4}{#5}{#6}
 }
@@ -69,8 +94,13 @@
     \GraphvizIT[#1]{#2}{graph}{#3}{#4}{#5}{#6}
 }
 
+\newcommand{\digraphBeamer}[5][scale=1]{
+    \GraphvizITBeamer[#1]{#2}{digraph}{#3}{#4}{#5}
+}
 
-
+\newcommand{\nondigraphBeamer}[5][scale=1]{
+    \GraphvizITBeamer[#1]{#2}{graph}{#3}{#4}{#5}
+}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
