@@ -6,6 +6,16 @@
 \usepackage{color}
 \usepackage[utf8]{inputenc}
 \usepackage[pdftex]{thumbpdf}
+\usepackage{gitinfo}
+
+\setbeamertemplate{frametitle continuation}[from second]
+% Now get rid of all the colours
+\setbeamercolor*{bibliography entry title}{fg=black}
+\setbeamercolor*{bibliography entry author}{fg=black}
+\setbeamercolor*{bibliography entry location}{fg=black}
+\setbeamercolor*{bibliography entry note}{fg=black}
+% and kill the abominable icon
+\setbeamertemplate{bibliography item}{\insertbiblabel}
 
 % Definition des couleurs personnelles
 \definecolor{DarkGreen}{rgb}{0,0.75,0}%
