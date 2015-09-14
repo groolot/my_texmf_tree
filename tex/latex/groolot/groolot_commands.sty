@@ -123,15 +123,12 @@
 % #3 = includegraphics options
 % #4 = le texte du caption
 % #5 = label de l'element
-    \begin{figure}
-        \centering
-            \begin{minipage}[c]{#1}
-                \centering
-                \includegraphics[#3]{#2}
-                \caption{#4}
-                \label{#5}
-            \end{minipage}
-    \end{figure}
+  \begin{figure}[h!tbp]
+      \centering
+      \includegraphics[#3]{#2}
+      \caption{#4}
+      \label{#5}
+  \end{figure}
 }
 \newcommand{\imageBoxed}[5][\textwidth]{%
 % #1 = largeur de la minipage
