@@ -5,46 +5,6 @@
 \usepackage[acronym]{glossaries}
 \makeglossaries
 
-\newglossaryentry{demontrer} { name=d\'emontrer, description={Prouver
-    d'une mani\`ere \'evidente et convaincante} }
-
-\newglossaryentry{verifier} { name=v\'erifier, description={Examiner,
-    rechercher si une chose est vraie, si elle est telle qu'elle doit
-    \^etre ou qu'on l'a d\'eclar\'ee} }
-
-\newglossaryentry{DEBIAN} { name=Debian GNU/Linux, description={Le
-    projet Debian est une association d'individus qui ont pour cause
-    commune de cr\'eer un syst\`eme d'exploitation libre. Le syst\`eme
-    d'exploitation ainsi cr\'e\'e est appel\'e Debian} }
-
-\newglossaryentry{driver} { name=driver, description={Un \emph{driver}
-    est un programme qui contient les instructions \`a ex\'ecuter pour
-    utiliser un certain p\'eriph\'erique informatique. Les
-    \emph{driver} sont fournis par l'auteur du syst\`eme
-    d'exploitation ou le fabricant du p\'eriph\'erique. Un syst\`eme
-    d'exploitation contient typiquement de nombreux \emph{drivers}
-    correspondant \`a de nombreux composants mat\'eriels susceptibles
-    d'\^etre mont\'es dans l'ordinateur} }
-
-\newglossaryentry{workflow}{name=workflow,description={Un workflow,
-    anglicisme pour flux de travaux, est la représentation d'une suite
-    de tâches ou opérations effectuées par une personne, un groupe de
-    personnes, un organisme, etc. Le terme flow (flux) renvoie au
-    passage du produit, du document, de l'information, etc., d'une
-    étape à l'autre. Le terme officiellement recommandé par la
-    Commission générale de terminologie et de néologie est « flux de
-    travaux ». Le grand dictionnaire terminologique propose « flux
-    de travaux », « flux des travaux », ou « automatisation des
-    processus ». On trouve aussi l'expression « flux opérationnel »
-    chez des professionnels}}
-
-\newglossaryentry{doxygen}{name=Doxygen,description={est un générateur
-    de documentation sous licence libre capable de produire une
-    documentation logicielle à partir du code source d'un
-    programme. Pour cela, il tient compte de la grammaire du langage
-    dans lequel est écrit le code source, ainsi que des commentaires
-    s'ils sont écrits dans un format particulier}}
-
 \newacronym{TCP}{TCP}{Transmission Control Protocol}
 \newacronym{IP}{IP}{Internet Protocol}
 \newacronym{IPv4}{IPv4}{\acrshort{IP} version 4}
@@ -90,6 +50,9 @@
 
 \newacronym{AMMD}{AMMD}{Amicale du M\'ecanik M\'etal Disco}
 \newacronym{OVH}{OVH}{On Vous H\'eberge}
+
+\newacronym{API}{API}{Application Programming Interface}
+\newacronym{XML}{XML}{eXtended Markup Language}
 \newacronym{POSIX}{POSIX}{Portable Operating System Interface X}
 \newacronym{ASCII}{ASCII}{American Standard Code for Information Interchange}
 \newacronym{QSOS}{QSOS}{Qualification and Selection of Opensource Software}
@@ -121,7 +84,6 @@
 \newacronym{CMS}{CMS}{Content Management System}
 \newacronym{LDAP}{LDAP}{Lightweight Directory Access Protocol}
 \newacronym{PHP}{PHP}{PHP Hypertext Preprocessor}
-\newacronym{XML}{XML}{eXtended Markup Language}
 \newacronym{ARP}{ARP}{Address Resolution Protocol}
 \newacronym{GDB}{GDB}{The \acrshort{GNU} Project Debugger}
 \newacronym{CLUSIF}{CLUSIF}{CLUb de la S\'ecurit\'e Informatique en France}
@@ -134,4 +96,124 @@
 \newacronym{UNIX}{UNIX}{UNiplexed Information and Computing Service}
 \newacronym{IBM}{IBM}{International Business Machines}
 \newacronym{PC}{PC}{Personal Computer}
+
+
+\newglossaryentry{demontrer} { name=d\'emontrer, description={Prouver
+    d'une mani\`ere \'evidente et convaincante} }
+
+\newglossaryentry{verifier} { name=v\'erifier, description={Examiner,
+    rechercher si une chose est vraie, si elle est telle qu'elle doit
+    \^etre ou qu'on l'a d\'eclar\'ee} }
+
+\newglossaryentry{DEBIAN} { name=Debian GNU/Linux, description={Le
+    projet Debian est une association d'individus qui ont pour cause
+    commune de cr\'eer un syst\`eme d'exploitation libre. Le syst\`eme
+    d'exploitation ainsi cr\'e\'e est appel\'e Debian} }
+
+\newglossaryentry{IHM}{text=IHM,name=Interaction
+  Homme-Machine,plural=Interactions Homme-Machine,first=Interaction
+  Homme-Machine (IHM),description={Les \glspl{IHM} définissent les
+    moyens et outils mis en œuvre afin qu'un humain puisse contrôler
+    et communiquer avec une machine. Les ingénieurs en ce domaine
+    étudient la façon dont les humains interagissent avec les
+    ordinateurs ou entre eux à l'aide d'ordinateurs, ainsi que la
+    façon de concevoir des systèmes qui soient ergonomiques,
+    efficaces, faciles à utiliser ou plus généralement adaptés à leur
+    contexte d'utilisation}}
+
+\newglossaryentry{GUI}{text=GUI,first=Graphical User Interface
+  (GUI),name=Graphical User Interface,description={En informatique,
+    une interface utilisateur graphique (anglais \emph{GUI} pour
+    \emph{Graphical User Interface}) est un dispositif d'\gls{IHM},
+    dans lequel les objets à manipuler sont dessinés sous forme de
+    pictogrammes à l'écran, que l'usager peut utiliser en imitant la
+    manipulation physique de ces objets avec un dispositif de
+    pointage, le plus souvent une souris}}
+
+\newglossaryentry{CLI}{text=CLI,first=Command Line Interface
+  (CLI),name=Command Line Interface,description={Une interface en
+    ligne de commande (en anglais \emph{Command Line Interface},
+    couramment abrégé \emph{CLI}) est une \gls{IHM} dans laquelle la
+    communication entre l'utilisateur et l'ordinateur s'effectue en
+    mode texte : 1. l'utilisateur tape une ligne de commande,
+    c'est-à-dire du texte au clavier pour demander à l'ordinateur
+    d'effectuer une opération ; 2. l'ordinateur affiche du texte
+    correspondant au résultat de l'exécution des commandes tapées ou à
+    des questions qu'un logiciel pose à l'utilisateur}}
+
+\newglossaryentry{TUI}{text=TUI,first=Terminal User Interface
+  (TUI),name=Terminal User Interface,description={Un environnement en
+    mode texte (\emph{TUI}, de l'anglais \emph{Text User Interface},
+    \emph{Textual User Interface} ou encore \emph{Terminal User
+      Interface} est un rétronyme introduit dans le jargon
+    informatique après l'invention des environnements graphiques pour
+    se distinguer des interfaces en ligne de commande. Ce type
+    d'\gls{IHM} occupe la totalité de l'écran, comme les \gls{GUI}, et
+    n'est donc pas limité au traitement ligne par ligne comme les
+    \gls{CLI} peuvent l'être}}
+
+\newglossaryentry{IDE}{name=IDE, first=Integrated Development
+  Environment (IDE), description={En programmation informatique, un
+    environnement de développement (abrégé \emph{EDI} en français ou
+    \emph{IDE} en anglais, pour \emph{Integrated Development
+      Environment}) est un ensemble d'outils fait pour augmenter la
+    productivité des programmeurs qui développent des logiciels. Il
+    comporte un éditeur de texte destiné à la programmation, des
+    fonctions qui permettent, par pression sur un bouton, de démarrer
+    le compilateur ou l'éditeur de liens ainsi qu'un débogueur en
+    ligne, qui permet d'exécuter ligne par ligne le programme en cours
+    de construction. Certains environnements sont dédiés à un langage
+    de programmation en particulier et peuvent contenir des outils de
+    construction graphique d'\gls{IHM}}}
+
+\newglossaryentry{Qt}{name=Qt, description={prononcé
+    officiellement en anglais \emph{cute} (/kju:t/) mais couramment
+    prononcé (/ky:te/) est une \gls{API} orientée objet et développée
+    en C++ et offre des composants d'interface graphique
+    (\emph{widgets}), d'accès aux données, de connexions réseaux, de
+    gestion des fils d'exécution, d'analyse \gls{XML}, etc}}
+
+\newglossaryentry{QtCreator}{name=Qt Creator, description={est
+    un \gls{IDE} multiplate-forme faisant partie du framework
+    \gls{Qt}. Il est donc orienté pour la programmation en
+    \texttt{C++}. Il intègre directement dans l'interface un
+    débogueur, un outil de création de \gls{GUI}, des outils pour la
+    publication de code sur \gls{Git} et \emph{Mercurial} ainsi que la
+    documentation \gls{Qt}. L'éditeur de texte intégré permet
+    l'autocomplétion ainsi que la coloration syntaxique. \emph{Qt
+      Creator} utilise sous \gls{GNULINUX} le compilateur
+    \texttt{gcc}. Il peut utiliser \texttt{MinGW} ou le compilateur de
+    \texttt{Visual Studio} sous \emph{Windows}. \emph{Qt Creator} a
+    été traduit en français par l'équipe \gls{Qt} de
+    Developpez.com}}
+
+\newglossaryentry{driver} { name=driver, description={Un \emph{driver}
+    est un programme qui contient les instructions \`a ex\'ecuter pour
+    utiliser un certain p\'eriph\'erique informatique. Les
+    \emph{driver} sont fournis par l'auteur du syst\`eme
+    d'exploitation ou le fabricant du p\'eriph\'erique. Un syst\`eme
+    d'exploitation contient typiquement de nombreux \emph{drivers}
+    correspondant \`a de nombreux composants mat\'eriels susceptibles
+    d'\^etre mont\'es dans l'ordinateur} }
+
+\newglossaryentry{workflow}{name=workflow,description={Un workflow,
+    anglicisme pour flux de travaux, est la représentation d'une suite
+    de tâches ou opérations effectuées par une personne, un groupe de
+    personnes, un organisme, etc. Le terme flow (flux) renvoie au
+    passage du produit, du document, de l'information, etc., d'une
+    étape à l'autre. Le terme officiellement recommandé par la
+    Commission générale de terminologie et de néologie est « flux de
+    travaux ». Le grand dictionnaire terminologique propose « flux
+    de travaux », « flux des travaux », ou « automatisation des
+    processus ». On trouve aussi l'expression « flux opérationnel »
+    chez des professionnels}}
+
+\newglossaryentry{doxygen}{name=Doxygen,description={est un générateur
+    de documentation sous licence libre capable de produire une
+    documentation logicielle à partir du code source d'un
+    programme. Pour cela, il tient compte de la grammaire du langage
+    dans lequel est écrit le code source, ainsi que des commentaires
+    s'ils sont écrits dans un format particulier}}
+
+
 
