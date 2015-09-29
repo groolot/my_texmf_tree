@@ -28,6 +28,8 @@
 \newacronym{AMSI}{AMSI}{Architecture Mat\'erielle des Syst\`emes d'Information}
 \newacronym{ALSI}{ALSI}{Architecture Logicielle des Syst\`emes d'Information}
 \newacronym{GEOSI}{GEOSI}{Gestion des Entreprises et Organisation des Syst\`emes d'Information}
+
+\newacronym{LYCMALRAUX}{lycée}{lycée André \textsc{Malraux}}
 \newacronym{SIO}{SIO}{Services Informatiques aux Organisations}
 \newacronym{SiUN}{Si1}{Support syst\`eme des acc\`es utilisateurs}
 \newacronym{SiDEUX}{Si2}{Support r\'eseau des acc\`es utilisateurs}
@@ -58,7 +60,6 @@
 \newacronym{QSOS}{QSOS}{Qualification and Selection of Opensource Software}
 \newacronym{GNU}{GNU}{GNU's Not Unix}
 \newacronym{GPL}{GPL}{\glsentrytext{GNU} General Public License}
-\newacronym{GNULINUX}{\glsentrytext{GNU}/Linux}{\glsentrytext{GNU}/Linux}
 \newacronym{BSD}{BSD}{Berkeley Software Distribution}
 \newacronym{GPG}{GPG}{\acrshort{GNU} Privacy Guard}
 \newacronym{SHA}{SHA}{Secure Hash Algorithm}
@@ -96,7 +97,12 @@
 \newacronym{UNIX}{UNIX}{UNiplexed Information and Computing Service}
 \newacronym{IBM}{IBM}{International Business Machines}
 \newacronym{PC}{PC}{Personal Computer}
+\newacronym{kernel}{kernel}{noyau Linux}
 
+\newglossaryentry{GNULINUX}{name=\glsentrytext{GNU}/Linux,
+  description=Dénomination donnée à l'ensemble des utilitaires
+  \gls{GNU} auquel est associé le \gls{kernel}. Il forme alors le
+  système d'exploitation \glsentrytext{GNU}/Linux}
 
 \newglossaryentry{demontrer} { name=d\'emontrer, description={Prouver
     d'une mani\`ere \'evidente et convaincante} }
@@ -105,7 +111,7 @@
     rechercher si une chose est vraie, si elle est telle qu'elle doit
     \^etre ou qu'on l'a d\'eclar\'ee} }
 
-\newglossaryentry{DEBIAN} { name=Debian GNU/Linux, description={Le
+\newglossaryentry{DEBIAN} { name=Debian \gls{GNULINUX}, description={Le
     projet Debian est une association d'individus qui ont pour cause
     commune de cr\'eer un syst\`eme d'exploitation libre. Le syst\`eme
     d'exploitation ainsi cr\'e\'e est appel\'e Debian} }
