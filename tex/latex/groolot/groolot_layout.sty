@@ -53,6 +53,10 @@
 \usepackage{listingsutf8}
 \lstdefinestyle{groolotNormal}{basicstyle=\normalsize\ttfamily}
 \lstdefinestyle{groolotScript}{basicstyle=\scriptsize\ttfamily}
+\lstdefinelanguage{diff}{%
+  comment=[f][\color{red!75!black}][0]{-},%
+  morecomment=[f][\color{green!50!black}][0]{+},%
+}%
 \lstset{% general command to set parameter(s), to be included in document environnement
 	style=groolotNormal,%
 	keywordstyle=\color{DarkRed},%
