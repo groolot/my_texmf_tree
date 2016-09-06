@@ -18,11 +18,12 @@
   {\def\examclassloaded{}}%
   {\usepackage{fancyhdr}}%
 \makeatother
-\usepackage[backend=bibtex8,backref=true,defernumbers=true]{biblatex}
-\addbibresource{groolot_bibliographie.bib}
+\usepackage[backend=bibtex8,backref=true,defernumbers=true,citestyle=authoryear,style=alphabetic]{biblatex}%
+%\addbibresource{\jobname.bib}%
+\addbibresource{groolot_bibliographie.bib}%
 \defbibcheck{online}{\iffieldundef{url}{\skipentry}{}}
 \defbibcheck{notonline}{\iffieldundef{url}{}{\skipentry}}
-\usepackage{afterpage}
+\usepackage{afterpage}%
 \usepackage[french]{varioref} % References croisees qui vont bien
 \usepackage[right]{eurosym} % Symbole euro \euro{}, ou avec valeur \EUR{123}
 \usepackage{enumerate} % Listes enumerees
@@ -111,14 +112,22 @@
 %###########################################
 %		Quelques definitions
 %###########################################
-\author{
-  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lr}
-      \multicolumn{2}{r}{version en date du \gitAuthorIsoDate, \REVISIONS}\\
-      \hline
-      \href{mailto:groolot@groolot.net}{Gr\'egory \bsc{David}} & \\
-      & Lycée André \bsc{Malraux}\\
-      & 3 rue de Beau Soleil\\
-      & 72700 Allonnes\\
-  \end{tabular*}
+\author{%
+  \begin{minipage}{1.0\linewidth}
+      \begin{flushright}
+          version en date du \gitAuthorIsoDate, \REVISIONS \hrule{}
+      \end{flushright}
+  \end{minipage}\\
+  \begin{minipage}{0.5\linewidth}
+      \noindent\href{mailto:groolot@groolot.net}{Grégory \textsc{David}}\\
+  \end{minipage}
+  \begin{minipage}{0.5\linewidth}
+      \begin{flushright}
+          \Glsentrydesc{LYCMALRAUX}\\
+          3 rue de Beau Soleil\\
+          72700 Allonnes\\
+      \end{flushright}
+  \end{minipage}
 }
+
 \date{}
