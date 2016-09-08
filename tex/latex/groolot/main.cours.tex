@@ -1,6 +1,6 @@
 % Titre
 %
-% Auteur  : Gregory DAVID
+% Auteur  : Grégory DAVID
 %%
 
 \documentclass[12pt,a4paper,oneside,titlepage,final]{article}
@@ -22,12 +22,12 @@
 ]{hyperref}
 \usepackage{groolot_commands}
 
-\title{
-	\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lr}
-		& {\Huge {\bf \MONTITRE}} \\
-		& {\huge \MONSOUSTITRE} \\
-		& {\large \DISCIPLINE} \\
-	\end{tabular*}
+\title{%
+  \begin{flushright}
+      \noindent{\Huge {\bf \MONTITRE}} \\
+      \noindent{\huge \MONSOUSTITRE} \\
+      \noindent{\large \DISCIPLINE} \\
+  \end{flushright}
 }
 
 %\printanswers\groolotPhiligranne{CORRECTION}
@@ -42,9 +42,9 @@
 % Contenu
 \HEADER{\MONTITRE}{\DISCIPLINE}
 
-\section*{Premi\`ere section}
+\section*{Première section}
 
-\section*{Deuxi\`eme section}
+\section*{Deuxième section}
 
 % References bibliographiques
 \newpage \printbibheading
