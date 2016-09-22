@@ -13,10 +13,14 @@
 \usepackage[T1]{fontenc}
 \usepackage[pdftex]{graphicx}
 \usepackage[usenames]{color}
+\usepackage{ifthen} % Package permettant de realiser des choses en fonction d'une condition
+    \newboolean{MONBOOL}
+    \setboolean{MONBOOL}{true}
+\newboolean{examclass}
 \makeatletter
 \@ifclassloaded{exam}%
-  {\def\examclassloaded{}}%
-  {\usepackage{fancyhdr}}%
+  {\def\examclassloaded{}\setboolean{examclass}{true}}%
+  {\usepackage{fancyhdr}\setboolean{examclass}{false}}%
 \makeatother
 \usepackage[backend=bibtex8,backref=true,defernumbers=true,citestyle=authoryear,style=alphabetic]{biblatex}%
 %\addbibresource{\jobname.bib}%
@@ -36,9 +40,6 @@
 \usepackage{dcolumn} % Alignement des colonnes d'une table selon le point decimal
     \newcolumntype{.}{D{.}{.}{-1}}
     \newcolumntype{,}{D{,}{,}{-1}}
-\usepackage{ifthen} % Package permettant de realiser des choses en fonction d'une condition
-    \newboolean{MONBOOL}
-    \setboolean{MONBOOL}{true}
 \usepackage{amsthm} % proof environnement
 %\usepackage{amsfonts}
 %\usepackage{amssymb}
@@ -85,7 +86,7 @@
         {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
         {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
         {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
-        {€}{{\EUR}}1 {£}{{\pounds}}1%
+        {│  }{{|\~~~}}1 {─}{{-}}1 {└─}{{ |-}}1 {├─}{{ |-}}1 {€}{{\EUR}}1 {£}{{\pounds}}1%
       }
 %%%%%%%%%
 
@@ -119,7 +120,7 @@
       \end{flushright}
   \end{minipage}\\
   \begin{minipage}[t]{0.5\linewidth}
-      \noindent document composé{\ifprintanswers\ et corrigé\fi} par\\
+      \noindent document composé{\ifexamclass\ifprintanswers\ et corrigé\fi} par\\
       \noindent\href{mailto:groolot@groolot.net}{Grégory \textsc{David}}\\
   \end{minipage}
   \begin{minipage}[t]{0.5\linewidth}
