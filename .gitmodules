@@ -1,0 +1,3 @@
+[submodule "tex/latex/groolot/style"]
+	path = tex/latex/groolot/style
+	url = git@framagit.org:groolot/style.git
