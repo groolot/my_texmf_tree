@@ -152,20 +152,38 @@ function helptext
 	cat <<- -EOF-
 
 	${PROGNAME} ver. ${VERSION}
-	This is a program to Create a LaTeX project from a template (Exam or Beamer for now).
+	This is a program to Create a LaTeX project from a template (Article, Exam or Beamer for now).
 
 	$(usage)
 
 	Options:
 
 	-h, --help	Display this help message and exit.
-        -c output_directory Specify the output directory of the Cours project. Create it if not existing.
+	-c output_directory Specify the output directory of the Cours project. Create it if not existing.
 	-e  output_directory Specify the output directory of the Exam project. Create it if not existing.
 	-b  output_directorySpecify the output directory of the Beamer project. Create it if not existing.
 
 
 
 -EOF-
+}
+
+function check_output
+{
+    OUTPUT=$1
+    if [ "${OUTPUT}" = "" ]; then
+	error_exit "You must specify an output directory"
+    fi
+    if [ ! -d ${TEMPLATE_DIR} ]; then
+	error_exit "The specified template directory ${TEMPLATE_DIR} does not exist"
+    fi
+    if [ ! -d ${OUTPUT} ]; then
+        mkdir -p ${OUTPUT} || error_exit "The output directory $1 can not be created"
+    else
+        if [ ! -w ${OUTPUT} ]; then
+	    error_exit "The specified output directory $1 is not writable"
+	fi
+    fi
 }
 
 function create_cours_project
@@ -176,21 +194,7 @@ function create_cours_project
 #			output directory
 #	-----------------------------------------------------------------------
     OUTPUT=$1
-	if [ "${OUTPUT}" = "" ]; then
-		error_exit "You must specify an output directory"
-	fi
-	if [ ! -d ${TEMPLATE_DIR} ]; then
-	   error_exit "The specified template directory ${TEMPLATE_DIR} does not exist"
-	fi
-
-	if [ ! -d ${OUTPUT} ]; then
-        mkdir -p ${OUTPUT} || error_exit "The output directory $1 can not be created"
-    else
-        if [ ! -w ${OUTPUT} ]; then
-	       error_exit "The specified output directory $1 is not writable"
-	   fi
-    fi
-#    for file_template in main licence copyright ; do
+    check_output $OUTPUT
     for file_template in main.cours ; do
         if [ ! -f ${OUTPUT}/${file_template}.tex ]; then
             cp -Rfv ${TEMPLATE_DIR}/${file_template}.tex ${OUTPUT}/ || error_exit "The copy of the ${file_template} has not been reached"
@@ -206,21 +210,7 @@ function create_exam_project
 #			output directory
 #	-----------------------------------------------------------------------
     OUTPUT=$1
-	if [ "${OUTPUT}" = "" ]; then
-		error_exit "You must specify an output directory"
-	fi
-	if [ ! -d ${TEMPLATE_DIR} ]; then
-	   error_exit "The specified template directory ${TEMPLATE_DIR} does not exist"
-	fi
-
-	if [ ! -d ${OUTPUT} ]; then
-        mkdir -p ${OUTPUT} || error_exit "The output directory $1 can not be created"
-    else
-        if [ ! -w ${OUTPUT} ]; then
-	       error_exit "The specified output directory $1 is not writable"
-	   fi
-    fi
-#    for file_template in main licence copyright ; do
+    check_output $OUTPUT
     for file_template in main.exam ; do
         if [ ! -f ${OUTPUT}/${file_template}.tex ]; then
             cp -Rfv ${TEMPLATE_DIR}/${file_template}.tex ${OUTPUT}/ || error_exit "The copy of the ${file_template} has not been reached"
@@ -236,25 +226,108 @@ function create_beamer_project
 #			output directory
 #	-----------------------------------------------------------------------
     OUTPUT=$1
-	if [ "${OUTPUT}" = "" ]; then
-		error_exit "You must specify an output directory"
-	fi
-	if [ ! -d ${TEMPLATE_DIR} ]; then
-	   error_exit "The specified template directory ${TEMPLATE_DIR} does not exist"
-	fi
-
-	if [ ! -d ${OUTPUT} ]; then
-        mkdir -p ${OUTPUT} || error_exit "The output directory $1 can not be created"
-    else
-        if [ ! -w ${OUTPUT} ]; then
-	       error_exit "The specified output directory $1 is not writable"
-	   fi
-    fi
-    for file_template in main_beamer ; do
+    check_output $OUTPUT
+    for file_template in main.beamer ; do
         if [ ! -f ${OUTPUT}/${file_template}.tex ]; then
             cp -Rfv ${TEMPLATE_DIR}/${file_template}.tex ${OUTPUT}/ || error_exit "The copy of the ${file_template} has not been reached"
         fi
     done
+}
+
+function make_project_git_tracked
+{
+#	-----------------------------------------------------------------------
+#	Function to make the project followed by Git
+#		Accepts 1 argument:
+#			output directory
+#	-----------------------------------------------------------------------
+    OUTPUT=$1
+    check_output $OUTPUT
+    pushd ${OUTPUT}
+    git init
+    cp ~/texmf/tex/latex/groolot/gitinfo_hook .git/hooks/post-checkout
+    ln -sv post-chekcout .git/hooks/post-commit
+    ln -sv post-chekcout .git/hooks/post-merge
+    cat > .gitignore <<EOF
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+*.dvi
+*-converted-to.*
+*.ps
+*.eps
+*.pdf
+.pdf
+*.bbl
+*.bcf
+*.blg
+*-blx.aux
+*-blx.bib
+*.brf
+*.run.xml
+*.fdb_latexmk
+*.synctex
+*.synctex(busy)
+*.synctex.gz
+*.synctex.gz(busy)
+*.pdfsync
+*.alg
+*.loa
+acs-*.bib
+*.thm
+*.nav
+*.snm
+*.vrb
+*.cpt
+*.lox
+*.acn
+*.acr
+*.glg
+*.glo
+*.gls
+*.glsdefs
+*-gnuplottex-*
+*.gaux
+*.gtex
+*.brf
+*.tikz
+*-tikzDictionary
+*.lol
+*.idx
+*.ilg
+*.ind
+*.ist
+*.maf
+*.mlf
+*.mlt
+*.mtc
+*.mtc[0-9]
+*.mtc[1-9][0-9]
+*.fmt
+*.nlo
+*.upa
+*.upb
+*.pytxcode
+pythontex-files-*/
+*.loe
+*.dpth
+*.md5
+*.auxlock
+*.tdo
+*.lod
+EOF
+    git add .gitignore
+    git commit -m "Import initial + .gitignore LaTeX"
+    git submodule add https://framagit.org/groolot/style.git style
+    popd
 }
 
 #	-------------------------------------------------------------------
@@ -288,10 +361,13 @@ fi
 while getopts ":he:b:c:" opt; do
 	case $opt in
 	    c ) create_cours_project $OPTARG
+		make_project_git_tracked $OPTARG
 		graceful_exit ;;
 	    e )	create_exam_project $OPTARG
+		make_project_git_tracked $OPTARG
 		graceful_exit ;;
 	    b )	create_beamer_project $OPTARG
+		make_project_git_tracked $OPTARG
 		graceful_exit ;;
 	    h )	helptext
 		graceful_exit ;;
