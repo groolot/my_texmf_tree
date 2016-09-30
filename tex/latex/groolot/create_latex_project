@@ -246,8 +246,8 @@ function make_project_git_tracked
     pushd ${OUTPUT}
     git init
     cp ~/texmf/tex/latex/groolot/gitinfo_hook .git/hooks/post-checkout
-    ln -sv post-chekcout .git/hooks/post-commit
-    ln -sv post-chekcout .git/hooks/post-merge
+    cp ~/texmf/tex/latex/groolot/gitinfo_hook .git/hooks/post-commit
+    cp ~/texmf/tex/latex/groolot/gitinfo_hook .git/hooks/post-merge
     cat > .gitignore <<EOF
 *.aux
 *.lof
