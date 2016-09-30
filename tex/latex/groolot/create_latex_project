@@ -249,6 +249,7 @@ function make_project_git_tracked
     cp ~/texmf/tex/latex/groolot/gitinfo_hook .git/hooks/post-commit
     cp ~/texmf/tex/latex/groolot/gitinfo_hook .git/hooks/post-merge
     cat > .gitignore <<EOF
+gitHeadInfo.gin
 *.aux
 *.lof
 *.log
