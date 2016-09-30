@@ -5,9 +5,9 @@
 
 \documentclass[12pt,a4paper,oneside,titlepage,final]{exam}
 
-\usepackage{groolot_layout}
-\usepackage{groolot_commands}
-\usepackage{groolot_glossaire}
+\usepackage{style/layout}
+\usepackage{style/commands}
+\usepackage{style/glossaire}
 
 \newcommand{\MONTITRE}{Titre}
 \newcommand{\MONSOUSTITRE}{Devoir Surveillé}
@@ -36,7 +36,7 @@
       \end{flushright}
   \end{minipage}\\
   \begin{minipage}[t]{0.5\linewidth}
-      \noindent sujet compos\'e{\ifprintanswers\ et corrig\'e\fi} par\\
+      \noindent sujet composé{\ifexamclass\ifprintanswers\ et corrigé\fi} par\\
       \noindent \href{mailto:groolot@groolot.net}{Grégory \textsc{David}}\\
       \vspace{5cm}\\
       \noindent Date : \hrulefill\\
