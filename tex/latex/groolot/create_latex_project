@@ -245,11 +245,12 @@ function make_project_git_tracked
     check_output $OUTPUT
     pushd ${OUTPUT}
     git init
-    cp ~/texmf/tex/latex/groolot/gitinfo_hook .git/hooks/post-checkout
-    cp ~/texmf/tex/latex/groolot/gitinfo_hook .git/hooks/post-commit
-    cp ~/texmf/tex/latex/groolot/gitinfo_hook .git/hooks/post-merge
+    GITINFO2_HOOKFILE=/usr/share/doc/texlive-doc/latex/gitinfo2/post-xxx-sample.txt
+    cp ${GITINFO2_HOOKFILE} .git/hooks/post-checkout
+    cp ${GITINFO2_HOOKFILE} .git/hooks/post-commit
+    cp ${GITINFO2_HOOKFILE} .git/hooks/post-merge
+    chmod a+x .git/hooks/post-*
     cat > .gitignore <<EOF
-gitHeadInfo.gin
 *.aux
 *.lof
 *.log
