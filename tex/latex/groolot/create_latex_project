@@ -4,7 +4,7 @@
 #
 #	Shell program to Create a LaTeX project from a template.
 #
-#	Copyright 2008,  <groolot@groolot.net>.
+#	Copyright 2008-2018,  <groolot@groolot.net>.
 #
 #	This program is free software; you can redistribute it and/or
 #	modify it under the terms of the GNU General Public License as
@@ -24,9 +24,10 @@
 #	Constants
 #	-------------------------------------------------------------------
 
-	PROGNAME=$(basename $0)
-	VERSION="0.0.2"
-	TEMPLATE_DIR=~/texmf/tex/latex/groolot
+PROGNAME=$(basename $0)
+AUTHOR="Grégory DAVID <groolot@groolot.net>"
+VERSION="0.0.3"
+TEMPLATE_DIR=~/texmf/tex/latex/groolot
 
 
 #	-------------------------------------------------------------------
@@ -135,7 +136,7 @@ function usage
 #		No arguments
 #	-----------------------------------------------------------------------
 
-	echo "Usage: ${PROGNAME} [ -h | --help ] [ -c | -e | -b ] output_directory"
+	  echo "Usage: ${PROGNAME} [ -h | --help ] [ -b | -c | -e | -g | -G | -l ] output_directory"
 }
 
 
@@ -147,24 +148,36 @@ function helptext
 #		No arguments
 #	-----------------------------------------------------------------------
 
-	local tab=$(echo -en "\t\t")
+	local tab=$(echo -en "\t")
 
 	cat <<- -EOF-
-
-	${PROGNAME} ver. ${VERSION}
-	This is a program to Create a LaTeX project from a template (Article, Exam or Beamer for now).
+	${PROGNAME} ver. ${VERSION}, ${AUTHOR}
+	This is a program to create a LaTeX project from a template (Article, Exam or Beamer for now) and configure it with Git.
 
 	$(usage)
 
 	Options:
 
-	-h, --help	Display this help message and exit.
-	-c output_directory Specify the output directory of the Cours project. Create it if not existing.
-	-e  output_directory Specify the output directory of the Exam project. Create it if not existing.
-	-b  output_directorySpecify the output directory of the Beamer project. Create it if not existing.
+	-h, --help
+$tab Display this help message and exit.
 
+	-b output_directory
+$tab Specify the output directory of the Beamer project. Create it if not existing.
 
+	-c output_directory
+$tab Specify the output directory of the Cours project. Create it if not existing.
 
+	-e output_directory
+$tab Specify the output directory of the Exam project. Create it if not existing.
+
+	-g output_directory
+$tab Add LaTeX .gitignore file to the output directory. Create it if not existing.
+
+	-G output_directory
+$tab Add .gitlab-ci.yml file to the output directory. Create it if not existing.
+
+	-l output_directory
+$tab Add .latexmkrc file to the output directory. Create it if not existing.
 -EOF-
 }
 
@@ -186,71 +199,107 @@ function check_output
     fi
 }
 
-function create_cours_project
+function create_project
 {
 #	-----------------------------------------------------------------------
 #	Function to create the project from the template
-#		Accepts 1 argument:
-#			output directory
-#	-----------------------------------------------------------------------
+    #		Accepts 2 arguments:
+    #			$1 = output directory
+    #     $2 = project type [cours, exam, beamer]
+    #	-----------------------------------------------------------------------
     OUTPUT=$1
     check_output $OUTPUT
-    for file_template in main.cours ; do
-        if [ ! -f ${OUTPUT}/${file_template}.tex ]; then
-            cp -Rfv ${TEMPLATE_DIR}/${file_template}.tex ${OUTPUT}/ || error_exit "The copy of the ${file_template} has not been reached"
-        fi
-    done
+    case $2 in
+        cours|exame|beamer)
+            for file_template in main.$2 ; do
+                if [ ! -f ${OUTPUT}/${file_template}.tex ]; then
+                    cp -Rfv ${TEMPLATE_DIR}/${file_template}.tex ${OUTPUT}/ || error_exit "The copy of the ${file_template} has not been reached"
+                fi
+            done
+    esac
 }
 
-function create_exam_project
+function add_gitlab_ci
 {
-#	-----------------------------------------------------------------------
-#	Function to create the project from the template
-#		Accepts 1 argument:
-#			output directory
-#	-----------------------------------------------------------------------
-    OUTPUT=$1
-    check_output $OUTPUT
-    for file_template in main.exam ; do
-        if [ ! -f ${OUTPUT}/${file_template}.tex ]; then
-            cp -Rfv ${TEMPLATE_DIR}/${file_template}.tex ${OUTPUT}/ || error_exit "The copy of the ${file_template} has not been reached"
-        fi
-    done
-}
-
-function create_beamer_project
-{
-#	-----------------------------------------------------------------------
-#	Function to create the project from the beamer template
-#		Accepts 1 argument:
-#			output directory
-#	-----------------------------------------------------------------------
-    OUTPUT=$1
-    check_output $OUTPUT
-    for file_template in main.beamer ; do
-        if [ ! -f ${OUTPUT}/${file_template}.tex ]; then
-            cp -Rfv ${TEMPLATE_DIR}/${file_template}.tex ${OUTPUT}/ || error_exit "The copy of the ${file_template} has not been reached"
-        fi
-    done
-}
-
-function make_project_git_tracked
-{
-#	-----------------------------------------------------------------------
-#	Function to make the project followed by Git
-#		Accepts 1 argument:
-#			output directory
-#	-----------------------------------------------------------------------
+    #	-----------------------------------------------------------------------
+    #	Function to add the gitlab CI/CD configuration file to the project followed by Git
+    #		Accepts 1 argument:
+    #			output directory
+    #	-----------------------------------------------------------------------
     OUTPUT=$1
     check_output $OUTPUT
     pushd ${OUTPUT}
     git init
-    GITINFO2_HOOKFILE=/usr/share/doc/texlive-doc/latex/gitinfo2/post-xxx-sample.txt
-    cp ${GITINFO2_HOOKFILE} .git/hooks/post-checkout
-    cp ${GITINFO2_HOOKFILE} .git/hooks/post-commit
-    cp ${GITINFO2_HOOKFILE} .git/hooks/post-merge
-    chmod a+x .git/hooks/post-*
+    cat > .gitlab-ci.yml <<EOF
+image: aergus/latex
+
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+  GIT_HOOKS_DIR: .git/hooks
+  GIT_POST_CHECKOUT_HOOK_FILE: .git/hooks/post-checkout
+
+before_script:
+  - pushd ~
+  - git clone https://framagit.org/groolot/my_texmf_tree.git texmf
+  - popd
+  - apt-get update -qq && apt-get install -y -qq graphviz
+
+build:
+  only:
+    - tags
+  script:
+    - mkdir -p \$GIT_HOOKS_DIR
+    - cp \$HOME/texmf/tex/latex/groolot/gitinfo_hook \$GIT_POST_CHECKOUT_HOOK_FILE
+    - chmod 755 \$GIT_POST_CHECKOUT_HOOK_FILE
+    - git checkout \$CI_COMMIT_TAG
+    - latexmk -pdf \$CI_PROJECT_NAME.tex
+  artifacts:
+    paths:
+      - \$CI_PROJECT_NAME.pdf
+EOF
+    git add .gitlab-ci.yml
+    git commit -m "Ajout de la configuration GitLab pour la CI/CD"
+    popd
+}
+
+function add_latexmkrc
+{
+    #	-----------------------------------------------------------------------
+    #	Function to add the Latexmk configuration file to the project followed by Git
+    #		Accepts 1 argument:
+    #			output directory
+    #	-----------------------------------------------------------------------
+    OUTPUT=$1
+    check_output $OUTPUT
+    pushd ${OUTPUT}
+    git init
+    cat > .latexmkrc <<EOF
+\$pdflatex = 'pdflatex --shell-escape %O %S';
+\$recorder = 1;
+\$hash_calc_ignore_pattern{'pdf'} = '.*';
+add_cus_dep('glo', 'gls', 0, 'makeglo2gls');
+sub makeglo2gls {
+    system("makeindex -s '$_[0]'.ist -t '$_[0]'.glg -o '$_[0]'.gls '$_[0]'.glo");
+}
+EOF
+    git add .latexmkrc
+    git commit -m "Ajout de la configuration locale pour Latexmk"
+    popd
+}
+
+function add_gitignore
+{
+    #	-----------------------------------------------------------------------
+    #	Function to add the .gitignore configuration file to the project followed by Git
+    #		Accepts 1 argument:
+    #			output directory
+    #	-----------------------------------------------------------------------
+    OUTPUT=$1
+    check_output $OUTPUT
+    pushd ${OUTPUT}
+    git init
     cat > .gitignore <<EOF
+*.dot
 *.aux
 *.lof
 *.log
@@ -327,8 +376,35 @@ pythontex-files-*/
 *.lod
 EOF
     git add .gitignore
-    git commit -m "Import initial + .gitignore LaTeX"
+    git commit -m "Ajout du .gitignore"
+    popd
+}
+
+function make_project_git_tracked
+{
+#	-----------------------------------------------------------------------
+#	Function to make the project followed by Git
+#		Accepts 1 argument:
+#			output directory
+#	-----------------------------------------------------------------------
+    OUTPUT=$1
+    check_output $OUTPUT
+    pushd ${OUTPUT}
+    git init
+    GITINFO2_HOOKFILE=/usr/share/doc/texlive-doc/latex/gitinfo2/post-xxx-sample.txt
+    cp ${GITINFO2_HOOKFILE} .git/hooks/post-checkout
+    cp ${GITINFO2_HOOKFILE} .git/hooks/post-commit
+    cp ${GITINFO2_HOOKFILE} .git/hooks/post-merge
+    chmod a+x .git/hooks/post-*
     git submodule add https://framagit.org/groolot/style.git style
+    git add style
+    git commit -m "Import initial et utilisation du sous mmodule de style"
+    pushd style
+    git remote add writable git@framagit.org:groolot/style.git
+    popd
+    add_gitignore .
+    add_latexmkrc .
+    add_gitlab_ci .
     popd
 }
 
@@ -360,22 +436,28 @@ if [ "$1" = "--help" ]; then
 	graceful_exit
 fi
 
-while getopts ":he:b:c:" opt; do
-	case $opt in
-	    c ) create_cours_project $OPTARG
-		make_project_git_tracked $OPTARG
-		graceful_exit ;;
-	    e )	create_exam_project $OPTARG
-		make_project_git_tracked $OPTARG
-		graceful_exit ;;
-	    b )	create_beamer_project $OPTARG
-		make_project_git_tracked $OPTARG
-		graceful_exit ;;
-	    h )	helptext
-		graceful_exit ;;
-	    * )	usage
-		clean_up
-		exit 1
+while getopts ":hb:c:e:g:G:l:" opt; do
+	  case $opt in
+	      b )	create_project $OPTARG beamer
+		        make_project_git_tracked $OPTARG
+            ;;
+	      c ) create_project $OPTARG cours
+		        make_project_git_tracked $OPTARG
+            ;;
+	      e )	create_project $OPTARG exam
+		        make_project_git_tracked $OPTARG
+            ;;
+        g ) add_gitignore $OPTARG
+            ;;
+        G ) add_gitlab_ci $OPTARG
+            ;;
+        l ) add_latexmkrc $OPTARG
+            ;;
+	      h )	helptext
+            ;;
+	      * )	usage
+		        clean_up
+		        exit 1
 	esac
 done
 
