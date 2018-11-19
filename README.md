@@ -1,22 +1,22 @@
 # Mes paquets préférés
- * todo
- * syntax
- * notes
- * menukeys
- * keycommand
- * lstautogobble
- * listings
- * invoice
- * gitinfo2
- * easyfig
- * doclicense
- * copyrightbox
- * booklet
- * owl (beamercolorthemeowl)
- * metropolis
- * bashful
- * xlop
- * dirtree
  * algorithmicx
+ * bashful
  * bitpattern
+ * booklet
  * bytefield
+ * copyrightbox
+ * dirtree
+ * doclicense
+ * easyfig
+ * gitinfo2
+ * invoice
+ * keycommand
+ * listings
+ * lstautogobble
+ * menukeys
+ * metropolis
+ * notes
+ * owl (beamercolorthemeowl)
+ * syntax
+ * todo
+ * xlop
