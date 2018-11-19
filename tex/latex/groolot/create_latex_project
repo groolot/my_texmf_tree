@@ -242,7 +242,7 @@ before_script:
   - pushd ~
   - git clone https://framagit.org/groolot/my_texmf_tree.git texmf
   - popd
-  - apt-get update -qq && apt-get install -y -qq graphviz
+  - apt-get update -qq && apt-get install -y -qq graphviz bookletimposer
 
 build:
   only:
@@ -253,9 +253,11 @@ build:
     - chmod 755 \$GIT_POST_CHECKOUT_HOOK_FILE
     - git checkout \$CI_COMMIT_TAG
     - latexmk -pdf \$CI_PROJECT_NAME.tex
+    - bookletimposer --no-gui --booklet --pages-per-sheet=2x1 --format=A4 --output=\$CI_PROJECT_NAME.booklet.pdf \$CI_PROJECT_NAME.pdf
   artifacts:
     paths:
       - \$CI_PROJECT_NAME.pdf
+      - \$CI_PROJECT_NAME.booklet.pdf
 EOF
     git add .gitlab-ci.yml
     git commit -m "Ajout de la configuration GitLab pour la CI/CD"
@@ -277,9 +279,31 @@ function add_latexmkrc
 \$pdflatex = 'pdflatex --shell-escape %O %S';
 \$recorder = 1;
 \$hash_calc_ignore_pattern{'pdf'} = '.*';
-add_cus_dep('glo', 'gls', 0, 'makeglo2gls');
-sub makeglo2gls {
-    system("makeindex -s '$_[0]'.ist -t '$_[0]'.glg -o '$_[0]'.gls '$_[0]'.glo");
+
+add_cus_dep('glo', 'gls', 0, 'run_makeglossaries');
+add_cus_dep('acn', 'acr', 0, 'run_makeglossaries');
+
+sub run_makeglossaries {
+  if ( \$silent ) {
+    system "makeglossaries -q '\$_[0]'";
+  }
+  else {
+    system "makeglossaries '\$_[0]'";
+  };
+}
+push @generated_exts, 'glo', 'gls', 'glg';
+push @generated_exts, 'acn', 'acr', 'alg';
+\$clean_ext .= ' %R.ist %R.xdy';
+
+add_cus_dep('dot', 'pdf', 0, 'run_dot');
+sub run_dot {
+  if ( \$silent ) {
+    system "dot -Gcharset=latin1 -Tpdf -o'$_[0].pdf' '$_[0].dot'";
+  }
+  else {
+    system "dot -v -Gcharset=latin1 -Tpdf -o'$_[0].pdf' '$_[0].dot'";
+  };
+  &cus_dep_require_primary_run;
 }
 EOF
     git add .latexmkrc
