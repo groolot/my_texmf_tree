@@ -298,10 +298,10 @@ push @generated_exts, 'acn', 'acr', 'alg';
 add_cus_dep('dot', 'pdf', 0, 'run_dot');
 sub run_dot {
   if ( \$silent ) {
-    system "dot -Gcharset=latin1 -Tpdf -o'$_[0].pdf' '$_[0].dot'";
+    system "dot -Gcharset=latin1 -Tpdf -o'\$_[0].pdf' '\$_[0].dot'";
   }
   else {
-    system "dot -v -Gcharset=latin1 -Tpdf -o'$_[0].pdf' '$_[0].dot'";
+    system "dot -v -Gcharset=latin1 -Tpdf -o'\$_[0].pdf' '\$_[0].dot'";
   };
   &cus_dep_require_primary_run;
 }
