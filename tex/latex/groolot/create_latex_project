@@ -424,7 +424,7 @@ function make_project_git_tracked
     git add style
     git commit -m "Import initial et utilisation du sous mmodule de style"
     pushd style
-    git remote add writable git@framagit.org:groolot/style.git
+    git remote set-url --push origin git@framagit.org:groolot/style.git
     popd
     add_gitignore .
     add_latexmkrc .
