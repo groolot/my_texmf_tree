@@ -1,6 +1,6 @@
 % Titre
 %
-% Auteur  : Grégory DAVID
+% Auteur : Grégory DAVID
 %%
 
 \documentclass[12pt,a4paper,oneside,titlepage,final]{article}
@@ -13,24 +13,22 @@
 \newcommand{\DISCIPLINE}{\glsentrytext{SiUN} -- \glsentrydesc{SiUN}}
 
 \usepackage[%
-	pdftex,%
-	pdfpagelabels=true,%
-	pdftitle={\MONTITRE},%
-	pdfauthor={Grégory DAVID},%
-	pdfsubject={\MONSOUSTITRE},%
-        colorlinks,%
-]{hyperref}
-\usepackage{style/commands}
+pdftex,%
+pdfpagelabels=true,%
+pdftitle={\MONTITRE},%
+pdfauthor={Grégory DAVID},%
+pdfsubject={\MONSOUSTITRE},%
+colorlinks,%
+%hidelinks,%
+]{hyperref} \usepackage{style/commands}
 
 \title{%
   \begin{flushright}
-      \noindent{\Huge {\bf \MONTITRE}} \\
-      \noindent{\huge \MONSOUSTITRE} \\
-      \noindent{\large \DISCIPLINE} \\
-  \end{flushright}
+    \noindent{\Huge {\bf \MONTITRE}} \\
+    \noindent{\huge \MONSOUSTITRE} \\
+    \noindent{\large \DISCIPLINE} \\
+  \end{flushright}%
 }
-
-%\printanswers\groolotPhiligranne{CORRECTION}
 
 \begin{document}
 % Page de titre
@@ -42,16 +40,566 @@
 % Contenu
 \HEADER{\MONTITRE}{\DISCIPLINE}
 
-\section*{Première section}
+\section{Contexte}\label{sec:contexte}
 
-\section*{Deuxième section}
+\section{Travail à faire}\label{sec:travail.a.faire}
 
+\section{Ressources}\label{sec:ressources}
+
+\clearpage
+\section{Couverture du référentiel de certification
+  \gls{SIO}}\label{sec:couverture.referentiel.sio}
+
+Le contenu de ce document permet d'aborder ou de couvrir les activités
+et compétences suivantes :
+\begin{enumerate}
+  \item [\textbf{A1.1.1}] Analyse du cahier des charges d'un service à
+  produire
+  \begin{itemize}
+    \item [\textbf{C1.1.1.1}] Recenser et caractériser les contextes
+    d'utilisation, les processus et les acteurs sur lesquels le
+    service à produire aura un impact
+    \item [\textbf{C1.1.1.2}] Identifier les fonctionnalités attendues
+    du service à produire
+    \item [\textbf{C1.1.1.3}] Préparer sa participation à une réunion
+  \end{itemize}
+  \item [\textbf{A1.1.2}] Étude de l'impact de l'intégration d'un
+  service sur le système informatique
+  \begin{itemize}
+    \item \item [\textbf{C1.1.2.1}] Analyser les interactions entre
+    services
+    \item [\textbf{C1.1.2.2}] Recenser les composants de
+    l'architecture technique sur lesquels le service à produire aura
+    un impact
+  \end{itemize}
+  \item [\textbf{A1.1.3}] Étude des exigences liées à la qualité
+  attendue d'un service
+  \begin{itemize}
+    \item \item [\textbf{C1.1.3.1}] Recenser et caractériser les
+    exigences liées à la qualité attendue du service à produire
+    \item [\textbf{C1.1.3.2}] Recenser et caractériser les exigences
+    de sécurité pour le service à produire
+  \end{itemize}
+  \item [\textbf{A1.2.1}] Élaboration et présentation d'un dossier de
+  choix de solution technique
+  \begin{itemize}
+    \item \item [\textbf{C1.2.1.1}] Recenser et caractériser des
+    solutions répondant au cahier des charges (adaptation d'une
+    solution existante ou réalisation d'une nouvelle)
+    \item [\textbf{C1.2.1.2}] Estimer le coût d'une solution
+    \item [\textbf{C1.2.1.3}] Rédiger un dossier de choix et un
+    argumentaire technique
+  \end{itemize}
+  \item [\textbf{A1.2.2}] Rédaction des spécifications techniques de
+  la solution retenue (adaptation d'une solution existante ou
+  réalisation d'une nouvelle solution)
+  \begin{itemize}
+    \item \item [\textbf{C1.2.2.1}] Recenser les composants
+    nécessaires à la réalisation de la solution retenue
+    \item [\textbf{C1.2.2.2}] Décrire l'implantation des différents
+    composants de la solution et les échanges entre eux
+    \item [\textbf{C1.2.2.3}] Rédiger les spécifications
+    fonctionnelles et techniques de la solution retenue dans le
+    formalisme exigé par l'organisation
+  \end{itemize}
+  \item [\textbf{A1.2.3}] Évaluation des risques liés à l'utilisation
+  d'un service
+  \begin{itemize}
+    \item \item [\textbf{C1.2.3.1}] Recenser les risques liés à une
+    mauvaise utilisation ou à une utilisation malveillante du service
+    \item [\textbf{C1.2.3.2}] Recenser les risques liés à un
+    dysfonctionnement du service
+    \item [\textbf{C1.2.3.3}] Prévoir les conséquences techniques de
+    la non prise en compte d'un risque
+  \end{itemize}
+  \item [\textbf{A1.2.4}] Détermination des tests nécessaires à la
+  validation d'un service
+  \begin{itemize}
+    \item \item [\textbf{C1.2.4.1}] Recenser les tests d'acceptation
+    nécessaires à la validation du service et les résultats attendus
+    \item [\textbf{C1.2.4.2}] Préparer les jeux d'essai et les
+    procédures pour la réalisation des tests
+  \end{itemize}
+  \item [\textbf{A1.2.5}] Définition des niveaux d'habilitation
+  associés à un service
+  \begin{itemize}
+    \item \item [\textbf{C1.2.5.1}] Recenser les utilisateurs du
+    service, leurs rôles et leur niveau de responsabilité
+    \item [\textbf{C1.2.5.2}] Recenser les ressources liées à
+    l'utilisation du service
+    \item [\textbf{C1.2.5.3}] Proposer les niveaux d'habilitation
+    associés au service
+  \end{itemize}
+  \item [\textbf{A1.3.1}] Test d'intégration et d'acceptation d'un
+  service
+  \begin{itemize}
+    \item \item [\textbf{C1.3.1.1}] Mettre en place l'environnement de
+    test du service
+    \item [\textbf{C1.3.1.2}] Tester le service
+    \item [\textbf{C1.3.1.3}] Rédiger le rapport de test
+  \end{itemize}
+  \item [\textbf{A1.3.2}] Définition des éléments nécessaires à la
+  continuité d'un service
+  \begin{itemize}
+    \item \item [\textbf{C1.3.2.1}] Identifier les éléments à
+    sauvegarder et à journaliser pour assurer la continuité du service
+    et la traçabilité des transactions
+    \item [\textbf{C1.3.2.2}] Spécifier les procédures d'alerte
+    associées au service
+    \item [\textbf{C1.3.2.3}] Décrire les solutions de fonctionnement
+    en mode dégradé et les procédures de reprise du service
+  \end{itemize}
+  \item [\textbf{A1.3.3}] Accompagnement de la mise en place d'un
+  nouveau service
+  \begin{itemize}
+    \item \item [\textbf{C1.3.3.1}] Mettre en place l'environnement de
+    formation au nouveau service
+    \item [\textbf{C1.3.3.2}] Informer et former les utilisateurs
+  \end{itemize}
+  \item [\textbf{A1.3.4}] Déploiement d'un service
+  \begin{itemize}
+    \item \item [\textbf{C1.3.4.1}] Mettre au point une procédure
+    d'installation de la solution
+    \item [\textbf{C1.3.4.2}] Automatiser l'installation de la
+    solution
+    \item [\textbf{C1.3.4.3}] Mettre en exploitation le service
+  \end{itemize}
+  \item [\textbf{A1.4.1}] Participation à un projet
+  \begin{itemize}
+    \item \item [\textbf{C1.4.1.1}] Établir son planning personnel en
+    fonction des exigences et du déroulement du projet
+    \item [\textbf{C1.4.1.2}] Rendre compte de son activité
+  \end{itemize}
+  \item [\textbf{A1.4.2}] Évaluation des indicateurs de suivi d'un
+  projet et justification des écarts
+  \begin{itemize}
+    \item \item [\textbf{C1.4.2.1}] Suivre l'exécution du projet
+    \item [\textbf{C1.4.2.2}] Analyser les écarts entre temps prévu et
+    temps consommé
+    \item [\textbf{C1.4.2.3}] Contribuer à l'évaluation du projet
+  \end{itemize}
+  \item [\textbf{A1.4.3}] Gestion des ressources
+  \begin{itemize}
+    \item \item [\textbf{C1.4.3.1}] Recenser les ressources humaines,
+    matérielles, logicielles et budgétaires nécessaires à l'exécution
+    du projet et de ses tâches personnelles
+    \item [\textbf{C1.4.3.2}] Recenser les ressources humaines,
+    matérielles, logicielles et budgétaires nécessaires à l'exécution
+    du projet et de ses tâches personnelles
+  \end{itemize}
+  \item [\textbf{A2.1.1}] Accompagnement des utilisateurs dans la
+  prise en main d'un service
+  \begin{itemize}
+    \item \item [\textbf{C2.1.1.1}] Aider les utilisateurs dans
+    l'appropriation du nouveau service
+    \item [\textbf{C2.1.1.2}] Identifier des besoins de formation
+    complémentaires
+    \item [\textbf{C2.1.1.3}] Rendre compte de la satisfaction des
+    utilisateurs
+  \end{itemize}
+  \item [\textbf{A2.1.2}] Évaluation et maintien de la qualité d'un
+  service
+  \begin{itemize}
+    \item \item [\textbf{C2.1.2.1}] Analyser les indicateurs de
+    qualité du service
+    \item [\textbf{C2.1.2.2}] Appliquer les procédures d'alerte
+    destinées à rétablir la qualité du service
+    \item [\textbf{C2.1.2.3}] Vérifier périodiquement le
+    fonctionnement du service en mode dégradé et la disponibilité des
+    éléments permettant une reprise du service
+    \item [\textbf{C2.1.2.4}] Superviser les services et leur
+    utilisation
+    \item [\textbf{C2.1.2.5}] Contrôler la confidentialité et
+    l'intégrité des données
+    \item [\textbf{C2.1.2.6}] Exploiter les indicateurs et les
+    fichiers d'audit
+    \item [\textbf{C2.1.2.7}] Produire les rapports d'activité
+    demandés par les différents acteurs
+  \end{itemize}
+  \item [\textbf{A2.2.1}] Suivi et résolution d'incidents
+  \begin{itemize}
+    \item \item [\textbf{C2.2.1.1}] Résoudre l'incident en s'appuyant
+    sur une base de connaissances et la documentation associée ou
+    solliciter l'entité compétente
+    \item [\textbf{C2.2.1.2}] Prendre le contrôle d'un système à
+    distance
+    \item [\textbf{C2.2.1.3}] Rédiger un rapport d'incident et
+    mémoriser l'incident et sa résolution dans une base de
+    connaissances
+    \item [\textbf{C2.2.1.4}] Faire évoluer une procédure de
+    résolution d'incident
+  \end{itemize}
+  \item [\textbf{A2.2.2}] Suivi et réponse à des demandes d'assistance
+  \begin{itemize}
+    \item \item [\textbf{C2.2.2.1}] Identifier le niveau d'assistance
+    souhaité et proposer une réponse adaptée en s'appuyant sur une
+    base de connaissances et sur la documentation associée ou
+    solliciter l'entité compétente
+    \item [\textbf{C2.2.2.2}] Informer l'utilisateur de la situation
+    de sa demande
+    \item [\textbf{C2.2.2.3}] Prendre le contrôle d'un poste
+    utilisateur à distance
+    \item [\textbf{C2.2.2.4}] Mémoriser la demande d'assistance et sa
+    réponse dans une base de connaissances
+  \end{itemize}
+  \item [\textbf{A2.2.3}] Réponse à une interruption de service
+  \begin{itemize}
+    \item \item [\textbf{C2.2.3.1}] Appliquer la procédure de
+    continuité du service en mode dégradé
+    \item [\textbf{C2.2.3.2}] Appliquer la procédure de reprise du
+    service
+  \end{itemize}
+  \item [\textbf{A2.3.1}] Identification, qualification et évaluation
+  d'un problème
+  \begin{itemize}
+    \item \item [\textbf{C2.3.1.1}] Repérer une suite de
+    dysfonctionnements récurrents d'un service
+    \item [\textbf{C2.3.1.2}] Identifier les causes de ce
+    dysfonctionnement
+    \item [\textbf{C2.3.1.3}] Qualifier le problème (contexte et
+    environnement)
+    \item [\textbf{C2.3.1.4}] Définir le degré d'urgence du problème
+    \item [\textbf{C2.3.1.5}] Évaluer les conséquences techniques du
+    problème
+  \end{itemize}
+  \item [\textbf{A2.3.2}] Proposition d'amélioration d'un service
+  \begin{itemize}
+    \item \item [\textbf{C2.3.2.1}] Décrire les incidences d'un
+    changement proposé sur le service
+    \item [\textbf{C2.3.2.2}] Évaluer le délai et le coût de
+    réalisation du changement proposé
+    \item [\textbf{C2.3.2.3}] Recenser les risques techniques,
+    humains, financiers et juridiques associés au changement proposé
+  \end{itemize}
+  \item [\textbf{A3.1.1}] Proposition d'une solution d'infrastructure
+  \begin{itemize}
+    \item \item [\textbf{C3.1.1.1}] Lister les composants matériels et
+    logiciels nécessaires à la prise en charge des processus, des flux
+    d'information et de leur rôle
+    \item [\textbf{C3.1.1.2}] Caractériser les éléments
+    d'interconnexion, les services, les serveurs et les équipements
+    terminaux nécessaires
+    \item [\textbf{C3.1.1.3}] Caractériser les éléments permettant
+    d'assurer la qualité et la sécurité des services
+    \item [\textbf{C3.1.1.4}] Recenser les modifications et/ou les
+    acquisitions nécessaires à la mise en place d'une solution
+    d'infrastructure compatible avec le budget et le planning
+    prévisionnels
+    \item [\textbf{C3.1.1.5}] Caractériser les solutions
+    d'interconnexion utilisées entre un réseau et d'autres réseaux
+    internes ou externes à l'organisation
+  \end{itemize}
+  \item [\textbf{A3.1.2}] Maquettage et prototypage d'une solution
+  d'infrastructure
+  \begin{itemize}
+    \item \item [\textbf{C3.1.2.1}] Concevoir une maquette de la
+    solution
+    \item [\textbf{C3.1.2.2}] Construire un prototype de la solution
+    \item [\textbf{C3.1.2.3}] Préparer l'intégration d'un composant
+    d'infrastructure
+  \end{itemize}
+  \item [\textbf{A3.1.3}] Prise en compte du niveau de sécurité
+  nécessaire à une infrastructure
+  \begin{itemize}
+    \item \item [\textbf{C3.1.3.1}] Caractériser des solutions de
+    sécurité et en évaluer le coût
+    \item [\textbf{C3.1.3.2}] Proposer une solution de sécurité
+    compatible avec les contraintes techniques, financières,
+    juridiques et organisationnelles
+    \item [\textbf{C3.1.3.3}] Décrire une solution de sécurité et les
+    risques couverts
+  \end{itemize}
+  \item [\textbf{A3.2.1}] Installation et configuration d'éléments
+  d'infrastructure
+  \begin{itemize}
+    \item \item [\textbf{C3.2.1.1}] Installer et configurer un élément
+    d'interconnexion, un service, un serveur, un équipement terminal
+    utilisateur
+    \item [\textbf{C3.2.1.2}] Installer et configurer un élément
+    d'interconnexion, un service, un serveur, un équipement terminal
+    utilisateur
+    \item [\textbf{C3.2.1.3}] Installer et configurer des éléments de
+    sécurité permettant d'assurer la protection du système
+    informatique
+  \end{itemize}
+  \item [\textbf{A3.2.2}] Remplacement ou mise à jour d'éléments
+  défectueux ou obsolètes
+  \begin{itemize}
+    \item \item [\textbf{C3.2.2.1}] Élaborer une procédure de
+    remplacement ou de migration respectant la continuité d'un service
+    \item [\textbf{C3.2.2.2}] Mettre en œuvre une procédure de
+    remplacement ou de migration
+  \end{itemize}
+  \item [\textbf{A3.2.3}] Mise à jour de la documentation technique
+  d'une solution d'infrastructure
+  \begin{itemize}
+    \item \item [\textbf{C3.2.3.1}] Repérer les éléments de la
+    documentation à mettre à jour
+    \item [\textbf{C3.2.3.2}] Mettre à jour la documentation
+  \end{itemize}
+  \item [\textbf{A3.3.1}] Administration sur site ou à distance des
+  éléments d'un réseau, de serveurs, de services et d'équipements
+  terminaux
+  \begin{itemize}
+    \item \item [\textbf{C3.3.1.1}] Installer et configurer des
+    éléments d'administration sur site ou à distance
+    \item [\textbf{C3.3.1.2}] Administrer des éléments
+    d'infrastructure sur site ou à distance
+  \end{itemize}
+  \item [\textbf{A3.3.2}] Planification des sauvegardes et gestion des
+  restaurations
+  \begin{itemize}
+    \item \item [\textbf{C3.3.2.1}] Installer et configurer des outils
+    de sauvegarde et de restauration
+    \item [\textbf{C3.3.2.2}] Définir des procédures de sauvegarde et
+    de restauration
+    \item [\textbf{C3.3.2.3}] Appliquer des procédures de sauvegarde
+    et de restauration
+  \end{itemize}
+  \item [\textbf{A3.3.3}] Gestion des identités et des habilitations
+  \begin{itemize}
+    \item \item [\textbf{C3.3.3.1}] Identifier les besoins en gestion
+    d'identité permettant de protéger les éléments d'une
+    infrastructure
+    \item [\textbf{C3.3.3.2}] Gérer des utilisateurs et une structure
+    organisationnelle
+    \item [\textbf{C3.3.3.3}] Affecter des droits aux utilisateurs sur
+    les éléments d'une solution d'infrastructure
+  \end{itemize}
+  \item [\textbf{A3.3.4}] Automatisation des tâches d'administration
+  \begin{itemize}
+    \item \item [\textbf{C3.3.4.1}] Repérer les tâches
+    d'administration à automatiser
+    \item [\textbf{C3.3.4.2}] Concevoir, réaliser et mettre en place
+    une procédure d'automatisation
+  \end{itemize}
+  \item [\textbf{A3.3.5}] Gestion des indicateurs et des fichiers
+  d'activité
+  \begin{itemize}
+    \item \item [\textbf{C3.3.5.1}] Installer et configurer les outils
+    nécessaires à la production d'indicateurs d'activité et à
+    l'exploitation de fichiers d'activité
+    \item [\textbf{C3.3.5.2}] Assurer la confidentialité des
+    informations collectées et traitées
+  \end{itemize}
+  \item [\textbf{A4.1.1}] Proposition d'une solution applicative
+  \begin{itemize}
+    \item \item [\textbf{C4.1.1.1}] Identifier les composants
+    logiciels nécessaires à la conception de la solution
+    \item [\textbf{C4.1.1.2}] Estimer les éléments de coût et le délai
+    de mise en œuvre de la solution
+  \end{itemize}
+  \item [\textbf{A4.1.2}] Conception ou adaptation de l'interface
+  utilisateur d'une solution applicative
+  \begin{itemize}
+    \item \item [\textbf{C4.1.2.1}] Définir les spécifications de
+    l'interface utilisateur de la solution applicative
+    \item [\textbf{C4.1.2.2}] Maquetter un élément de la solution
+    applicative
+    \item [\textbf{C4.1.2.3}] Concevoir et valider la maquette en
+    collaboration avec des utilisateurs
+  \end{itemize}
+  \item [\textbf{A4.1.3}] Conception ou adaptation d'une base de
+  données
+  \begin{itemize}
+    \item \item [\textbf{C4.1.3.1}] Modéliser le schéma de données
+    nécessaire à la mise en place de la solution applicative
+    \item [\textbf{C4.1.3.2}] Implémenter le schéma de données dans un
+    SGBD
+    \item [\textbf{C4.1.3.3}] Programmer des éléments de la solution
+    applicative dans le langage d'un SGBD
+    \item [\textbf{C4.1.3.4}] Manipuler les données liées à la
+    solution applicative à travers un langage de requête
+  \end{itemize}
+  \item [\textbf{A4.1.4}] Définition des caractéristiques d'une
+  solution applicative
+  \begin{itemize}
+    \item \item [\textbf{C4.1.4.1}] Recenser et caractériser les
+    composants existants ou à développer utiles à la réalisation de la
+    solution applicative dans le respect des budgets et planning
+    prévisionnels
+  \end{itemize}
+  \item [\textbf{A4.1.5}] Prototypage de composants logiciels
+  \begin{itemize}
+    \item \item [\textbf{C4.1.5.1}] Choisir les éléments de la
+    solution à prototyper
+    \item [\textbf{C4.1.5.2}] Développer un prototype
+    \item [\textbf{C4.1.5.3}] Valider un prototype
+  \end{itemize}
+  \item [\textbf{A4.1.6}] Gestion d'environnements de développement et
+  de test
+  \begin{itemize}
+    \item \item [\textbf{C4.1.6.1}] Mettre en place et exploiter un
+    environnement de développement
+    \item [\textbf{C4.1.6.2}] Mettre en place et exploiter un
+    environnement de test
+  \end{itemize}
+  \item [\textbf{A4.1.7}] Développement, utilisation ou adaptation de
+  composants logiciels
+  \begin{itemize}
+    \item \item [\textbf{C4.1.7.1}] Développer les éléments d'une
+    solution
+    \item [\textbf{C4.1.7.2}] Créer un composant logiciel
+    \item [\textbf{C4.1.7.3}] Analyser et modifier le code d'un
+    composant logiciel
+    \item [\textbf{C4.1.7.4}] Utiliser des composants d'accès aux
+    données
+    \item [\textbf{C4.1.7.5}] Mettre en place des éléments de sécurité
+    liés à l'utilisation d'un composant logiciel
+  \end{itemize}
+  \item [\textbf{A4.1.8}] Réalisation des tests nécessaires à la
+  validation d'éléments adaptés ou développés
+  \begin{itemize}
+    \item \item [\textbf{C4.1.8.1}] Élaborer et réaliser des tests
+    unitaires
+    \item [\textbf{C4.1.8.2}] Mettre en évidence et corriger les
+    écarts
+  \end{itemize}
+  \item [\textbf{A4.1.9}] Rédaction d'une documentation technique
+  \begin{itemize}
+    \item \item [\textbf{C4.1.9.1}] Produire ou mettre à jour la
+    documentation technique d'une solution applicative et de ses
+    composants logiciels
+  \end{itemize}
+  \item [\textbf{A4.1.10}] Rédaction d'une documentation d'utilisation
+  \begin{itemize}
+    \item \item [\textbf{C4.1.10.1}] Rédiger la documentation
+    d'utilisation, une aide en ligne, une FAQ
+    \item [\textbf{C4.1.10.2}] Adapter la documentation d'utilisation
+    à chaque contexte d'utilisation
+  \end{itemize}
+  \item [\textbf{A4.2.1}] Analyse et correction d'un
+  dysfonctionnement, d'un problème de qualité de service ou de
+  sécurité
+  \begin{itemize}
+    \item \item [\textbf{C4.2.1.1}] Élaborer un jeu d'essai permettant
+    de reproduire le dysfonctionnement
+    \item [\textbf{C4.2.1.2}] Repérer les composants à l'origine du
+    dysfonctionnement
+    \item [\textbf{C4.2.1.3}] Concevoir les mises à jour à effectuer
+    \item [\textbf{C4.2.1.4}] Réaliser les mises à jour
+  \end{itemize}
+  \item [\textbf{A4.2.2}] Adaptation d'une solution applicative aux
+  évolutions de ses composants
+  \begin{itemize}
+    \item \item [\textbf{C4.2.2.1}] Repérer les évolutions des
+    composants utilisés et leurs conséquences
+    \item [\textbf{C4.2.2.2}] Concevoir les mises à jour à effectuer
+    \item [\textbf{C4.2.2.3}] Élaborer et réaliser les tests unitaires
+    des composants mis à jour
+  \end{itemize}
+  \item [\textbf{A4.2.3}] Réalisation des tests nécessaires à la mise
+  en production d'éléments mis à jour
+  \begin{itemize}
+    \item \item [\textbf{C4.2.3.1}] Élaborer et réaliser des tests
+    d'intégration et de non régression de la solution mise à jour
+    \item [\textbf{C4.2.3.2}] Concevoir une procédure de migration et
+    l'appliquer dans le respect de la continuité de service
+  \end{itemize}
+  \item [\textbf{A4.2.4}] Mise à jour d'une documentation technique
+  \begin{itemize}
+    \item \item [\textbf{C4.2.4.1}] Repérer les éléments de la
+    documentation à mettre à jour
+    \item [\textbf{C4.2.4.2}] Mettre à jour une documentation
+  \end{itemize}
+  \item [\textbf{A5.1.1}] Mise en place d'une gestion de configuration
+  \begin{itemize}
+    \item \item [\textbf{C5.1.1.1}] Recenser les caractéristiques
+    techniques nécessaires à la gestion des éléments de la
+    configuration d'une organisation
+    \item [\textbf{C5.1.1.2}] Paramétrer une solution de gestion des
+    éléments d'une configuration
+  \end{itemize}
+  \item [\textbf{A5.1.2}] Recueil d'informations sur une configuration
+  et ses éléments
+  \begin{itemize}
+    \item \item [\textbf{C5.1.2.1}] Renseigner les événements relatifs
+    au cycle de vie d'un élément de la configuration
+    \item [\textbf{C5.1.2.2}] Actualiser les caractéristiques des
+    éléments de la configuration
+  \end{itemize}
+  \item [\textbf{A5.1.3}] Suivi d'une configuration et de ses éléments
+  \begin{itemize}
+    \item \item [\textbf{C5.1.3.1}] Contrôler et auditer les éléments
+    de la configuration
+    \item [\textbf{C5.1.3.2}] Reconstituer un historique des
+    modifications effectuées sur les éléments de la configuration
+    \item [\textbf{C5.1.3.3}] Identifier les éléments de la
+    configuration à modifier ou à remplacer
+    \item [\textbf{C5.1.3.4}] Repérer les équipements obsolètes et en
+    proposer le traitement dans le respect de la réglementation en
+    vigueur
+  \end{itemize}
+  \item [\textbf{A5.1.4}] Étude de propositions de contrat de service
+  (client, fournisseur)
+  \begin{itemize}
+    \item \item [\textbf{C5.1.4.1}] Assister la maîtrise d'ouvrage
+    dans l'analyse technique de la proposition de contrat
+    \item [\textbf{C5.1.4.2}] Interpréter des indicateurs de suivi de
+    la prestation associée à la proposition de contrat
+    \item [\textbf{C5.1.4.3}] Renseigner les éléments permettant
+    d'estimer la valeur du service
+  \end{itemize}
+  \item [\textbf{A5.1.5}] Évaluation d'un élément de configuration ou
+  d'une configuration
+  \begin{itemize}
+    \item \item [\textbf{C5.1.5.1}] Vérifier un plan d'amortissement
+    \item [\textbf{C5.1.5.2}] Apprécier la valeur actuelle d'un
+    élément de configuration
+  \end{itemize}
+  \item [\textbf{A5.1.6}] Évaluation d'un investissement informatique
+  \begin{itemize}
+    \item \item [\textbf{C5.1.6.1}] Renseigner les variables d'une
+    étude de rentabilité d'un investissement
+    \item [\textbf{C5.1.6.2}] Caractériser et prévoir les
+    investissements matériels et logiciels
+  \end{itemize}
+  \item [\textbf{A5.2.1}] Exploitation des référentiels, normes et
+  standards adoptés par le prestataire informatique
+  \begin{itemize}
+    \item \item [\textbf{C5.2.1.1}] Évaluer le degré de conformité des
+    pratiques à un référentiel, à une norme ou à un standard adopté
+    par le prestataire informatique
+    \item [\textbf{C5.2.1.2}] Identifier et partager les bonnes
+    pratiques à intégrer
+  \end{itemize}
+  \item [\textbf{A5.2.2}] Veille technologique
+  \begin{itemize}
+    \item \item [\textbf{C5.2.2.1}] Définir une stratégie de recherche
+    d'informations
+    \item [\textbf{C5.2.2.2}] Tenir à jour une liste de sources
+    d'information
+    \item [\textbf{C5.2.2.3}] Évaluer la qualité d'une source
+    d'information en fonction d'un besoin
+    \item [\textbf{C5.2.2.4}] Synthétiser et diffuser les résultats
+    d'une veille
+  \end{itemize}
+  \item [\textbf{A5.2.3}] Repérage des compléments de formation ou
+  d'auto-formation utiles à l'acquisition de nouvelles compétences
+  \begin{itemize}
+    \item \item [\textbf{C5.2.3.1}] Identifier les besoins de
+    formation pour mettre en œuvre une technologie, un composant, un
+    outil ou une méthode
+    \item [\textbf{C5.2.3.2}] Repérer l'offre et les dispositifs de
+    formation
+  \end{itemize}
+  \item [\textbf{A5.2.4}] Étude d'une technologie, d'un composant,
+  d'un outil ou d'une méthode
+  \begin{itemize}
+    \item \item [\textbf{C5.2.4.1}] Se documenter à propos d'une
+    technologie, d'un composant, d'un outil ou d'une méthode
+    \item [\textbf{C5.2.4.2}] Identifier le potentiel et les limites
+    d'une technologie, d'un composant, d'un outil ou d'une méthode par
+    rapport à un service à produire
+  \end{itemize}
+\end{enumerate}
+
+\clearpage%
 % References bibliographiques
-\newpage \printbibheading
+\printbibheading%
 \printbibliography[nottype=online,check=notonline,heading=subbibliography,title={Bibliographiques}]
 \printbibliography[check=online,heading=subbibliography,title={Webographiques}]
 
-\printglossaries
+\printglossaries%
 
 \end{document}
-
