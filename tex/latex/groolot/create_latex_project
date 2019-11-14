@@ -242,22 +242,25 @@ before_script:
   - pushd ~
   - git clone https://framagit.org/groolot/my_texmf_tree.git texmf
   - popd
-  - apt-get update -qq && apt-get install -y -qq graphviz bookletimposer
+  - mkdir -p \$GIT_HOOKS_DIR
+  - cp \$HOME/texmf/tex/latex/groolot/gitinfo_hook \$GIT_POST_CHECKOUT_HOOK_FILE
+  - chmod 755 \$GIT_POST_CHECKOUT_HOOK_FILE
+  - git checkout \$CI_COMMIT_TAG
+  - apt-get update -qq && apt-get install -y -qq graphviz
 
-build:
+stages:
+  - build
+
+principal:
+  stage: build
   only:
     - tags
   script:
-    - mkdir -p \$GIT_HOOKS_DIR
-    - cp \$HOME/texmf/tex/latex/groolot/gitinfo_hook \$GIT_POST_CHECKOUT_HOOK_FILE
-    - chmod 755 \$GIT_POST_CHECKOUT_HOOK_FILE
-    - git checkout \$CI_COMMIT_TAG
     - latexmk -pdf \$CI_PROJECT_NAME.tex
-    - bookletimposer --no-gui --booklet --pages-per-sheet=2x1 --format=A4 --output=\$CI_PROJECT_NAME.booklet.pdf \$CI_PROJECT_NAME.pdf
   artifacts:
+    name: "\$CI_PROJECT_NAME-\$CI_COMMIT_REF_NAME"
     paths:
       - \$CI_PROJECT_NAME.pdf
-      - \$CI_PROJECT_NAME.booklet.pdf
 EOF
     git add .gitlab-ci.yml
     git commit -m "Ajout de la configuration GitLab pour la CI/CD"
