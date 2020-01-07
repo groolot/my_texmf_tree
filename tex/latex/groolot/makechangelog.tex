@@ -8,7 +8,7 @@ export LAST=$(git rev-list --max-parents=0 HEAD)
 for tag in $(git tag --list)
 do
 echo "\\paragraph{$tag} ~\\\\"
-git log --pretty=short $LAST..$tag | git shortlog | sed -e 's/\\/\\textbackslash{}/g' -e 's/_/\\_/g' -e 's/&/\\&/g' -e 's/\(^[^ ].*$\)/\1\\begin{itemize}/g' -e 's/^ /\\item/g' | sed -e 's/\(https\?:\/\/.\+\)/\\url{\1}/g' | sed -e 's/LaTeX/\\LaTeX{}/g'
+git log --pretty=short $LAST..$tag | git shortlog | sed -e 's/\\/\\textbackslash{}/g' -e 's/_/\\_/g' -e 's/~/\\textasciitilde/g' -e 's/&/\\&/g' -e 's/\(^[^ ].*$\)/\1\\begin{itemize}/g' -e 's/^ /\\item/g' | sed -e 's/\(https\?:\/\/.\+\)/\\url{\1}/g' | sed -e 's/LaTeX/\\LaTeX{}/g'
 echo "\\end{itemize}"
 export LAST=$tag
 done
