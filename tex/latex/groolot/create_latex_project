@@ -136,7 +136,7 @@ function usage
 #		No arguments
 #	-----------------------------------------------------------------------
 
-	  echo "Usage: ${PROGNAME} [ -h | --help ] [ -b | -c | -e | -g | -G | -l | -s ] output_directory"
+	  echo "Usage: ${PROGNAME} [ -h | --help ] [ -b | -c | -e | -g | -G | -l | -s | -H ] output_directory"
 }
 
 
@@ -181,6 +181,9 @@ $tab Add .latexmkrc file to the output directory. Create it if not existing.
 
 	-s output_directory
 $tab Add style/ submodule to the output directory. Create it if not existing.
+
+	-H output_directory
+$tab Add gitinfo2 hook files to the output directory. Create it if not existing.
 -EOF-
 }
 
@@ -222,6 +225,33 @@ function create_project
     esac
 }
 
+function add_gitinfo2_hook
+{
+    #	-----------------------------------------------------------------------
+    #	Function to add the gitinfo2hook file to .post-checkout
+    #		Accepts 1 argument:
+    #			output directory
+    #	-----------------------------------------------------------------------
+    GITINFO2_HOOKFILE=/usr/share/doc/texlive-doc/latex/gitinfo2/post-xxx-sample.txt
+    if [ -f ${GITINFO2_HOOKFILE} ]
+    then
+        OUTPUT=$1
+        check_output $OUTPUT
+        pushd ${OUTPUT}
+        git init
+        install -Dv ${GITINFO2_HOOKFILE} .post-checkout
+        for gitinfo in checkout merge commit
+        do
+            ln -sv ../../.post-checkout .git/hooks/post-$gitinfo
+        done
+        git add .post-checkout
+        git commit -m "Ajout du fichier de Hook Git pour le package LaTeX gitinfo2"
+        popd
+    else
+        error_exit "${GITINFO2_HOOKFILE} does not exist!"
+    fi
+}
+
 function add_gitlab_ci
 {
     #	-----------------------------------------------------------------------
@@ -234,7 +264,7 @@ function add_gitlab_ci
     pushd ${OUTPUT}
     git init
     cat > .gitlab-ci.yml <<EOF
-image: aergus/latex
+image: groolot/latex
 
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
@@ -242,14 +272,8 @@ variables:
   GIT_POST_CHECKOUT_HOOK_FILE: .git/hooks/post-checkout
 
 before_script:
-  - pushd ~
-  - git clone https://framagit.org/groolot/my_texmf_tree.git texmf
-  - popd
-  - mkdir -p \$GIT_HOOKS_DIR
-  - cp \$HOME/texmf/tex/latex/groolot/gitinfo_hook \$GIT_POST_CHECKOUT_HOOK_FILE
-  - chmod 755 \$GIT_POST_CHECKOUT_HOOK_FILE
+  - install -Dv .post-checkout \$GIT_POST_CHECKOUT_HOOK_FILE
   - git checkout \$CI_COMMIT_TAG
-  - apt-get update -qq && apt-get install -y -qq graphviz
 
 stages:
   - build
@@ -449,6 +473,7 @@ function make_project_git_tracked
     add_submodule_style .
     add_gitignore .
     add_latexmkrc .
+    add_gitinfo2_hook .
     add_gitlab_ci .
     popd
 }
@@ -481,7 +506,7 @@ if [ "$1" = "--help" ]; then
 	graceful_exit
 fi
 
-while getopts ":hb:c:e:g:G:l:s:" opt; do
+while getopts ":hb:c:e:g:G:l:s:H:" opt; do
 	  case $opt in
 	      b )	create_project $OPTARG beamer
 		        make_project_git_tracked $OPTARG
@@ -499,6 +524,8 @@ while getopts ":hb:c:e:g:G:l:s:" opt; do
         l ) add_latexmkrc $OPTARG
             ;;
         s ) add_submodule_style $OPTARG
+            ;;
+        H ) add_gitinfo2_hook $OPTARG
             ;;
 	      h )	helptext
             ;;
