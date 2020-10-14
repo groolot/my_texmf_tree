@@ -1,28 +1,28 @@
 #!/bin/bash
 
-#	-------------------------------------------------------------------
+# -------------------------------------------------------------------
 #
-#	Shell program to Create a LaTeX project from a template.
+# Shell program to Create a LaTeX project from a template.
 #
-#	Copyright 2008-2018,  <groolot@groolot.net>.
+#  Copyright 2008-2018, <groolot@groolot.net>.
 #
-#	This program is free software; you can redistribute it and/or
-#	modify it under the terms of the GNU General Public License as
-#	published by the Free Software Foundation; either version 2 of the
-#	License, or (at your option) any later version.
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
 #
-#	This program is distributed in the hope that it will be useful, but
-#	WITHOUT ANY WARRANTY; without even the implied warranty of
-#	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-#	General Public License for more details.
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
 #
 #
-#	-------------------------------------------------------------------
+# -------------------------------------------------------------------
 
 
-#	-------------------------------------------------------------------
-#	Constants
-#	-------------------------------------------------------------------
+# -------------------------------------------------------------------
+# Constants
+# -------------------------------------------------------------------
 
 PROGNAME=$(basename $0)
 AUTHOR="Grégory DAVID <groolot@groolot.net>"
@@ -30,160 +30,151 @@ VERSION="0.0.3"
 TEMPLATE_DIR=~/texmf/tex/latex/groolot
 
 
-#	-------------------------------------------------------------------
-#	Functions
-#	-------------------------------------------------------------------
+# -------------------------------------------------------------------
+# Functions
+# -------------------------------------------------------------------
 
 
 function clean_up
 {
+    # -----------------------------------------------------------------------
+    # Function to remove temporary files and other housekeeping
+    #   No arguments
+    # -----------------------------------------------------------------------
 
-#	-----------------------------------------------------------------------
-#	Function to remove temporary files and other housekeeping
-#		No arguments
-#	-----------------------------------------------------------------------
-
-	rm -f ${TEMP_FILE1}
+    rm -f ${TEMP_FILE1}
 }
 
 
 function error_exit
 {
-
-#	-----------------------------------------------------------------------
-#	Function for exit due to fatal program error
-#		Accepts 1 argument:
-#			string containing descriptive error message
-#	-----------------------------------------------------------------------
-
-
-	echo "${PROGNAME}: ${1:-"Unknown Error"}" >&2
-	clean_up
-	exit 1
+    # -----------------------------------------------------------------------
+    # Function for exit due to fatal program error
+    #   Accepts 1 argument:
+    #     string containing descriptive error message
+    # -----------------------------------------------------------------------
+    echo "${PROGNAME}: ${1:-"Unknown Error"}" >&2
+    clean_up
+    exit 1
 }
 
 
 function graceful_exit
 {
+    #  -----------------------------------------------------------------------
+    #  Function called for a graceful exit
+    #    No arguments
+    #  -----------------------------------------------------------------------
 
-#	-----------------------------------------------------------------------
-#	Function called for a graceful exit
-#		No arguments
-#	-----------------------------------------------------------------------
-
-	clean_up
-	exit
+    clean_up
+    exit
 }
 
 
 function signal_exit
 {
+    #  -----------------------------------------------------------------------
+    #  Function to handle termination signals
+    #    Accepts 1 argument:
+    #      signal_spec
+    #  -----------------------------------------------------------------------
 
-#	-----------------------------------------------------------------------
-#	Function to handle termination signals
-#		Accepts 1 argument:
-#			signal_spec
-#	-----------------------------------------------------------------------
-
-	case $1 in
-		INT)	echo "$PROGNAME: Program aborted by user" >&2
-			clean_up
-			exit
-			;;
-		TERM)	echo "$PROGNAME: Program terminated" >&2
-			clean_up
-			exit
-			;;
-		*)	error_exit "$PROGNAME: Terminating on unknown signal"
-			;;
-	esac
+    case $1 in
+        INT)  echo "$PROGNAME: Program aborted by user" >&2
+              clean_up
+              exit
+              ;;
+        TERM)  echo "$PROGNAME: Program terminated" >&2
+              clean_up
+              exit
+              ;;
+        *)  error_exit "$PROGNAME: Terminating on unknown signal"
+            ;;
+    esac
 }
 
 
 function make_temp_files
 {
+    #  -----------------------------------------------------------------------
+    #  Function to create temporary files
+    #    No arguments
+    #  -----------------------------------------------------------------------
 
-#	-----------------------------------------------------------------------
-#	Function to create temporary files
-#		No arguments
-#	-----------------------------------------------------------------------
+    # Use user's local tmp directory if it exists
 
-	# Use user's local tmp directory if it exists
+    if [ -d ~/tmp ]; then
+        TEMP_DIR=~/tmp
+    else
+        TEMP_DIR=/tmp
+    fi
 
-	if [ -d ~/tmp ]; then
-		TEMP_DIR=~/tmp
-	else
-		TEMP_DIR=/tmp
-	fi
+    # Temp file for this script, using paranoid method of creation to
+    # insure that file name is not predictable.  This is for security to
+    # avoid "tmp race" attacks.  If more files are needed, create using
+    # the same form.
 
-	# Temp file for this script, using paranoid method of creation to
-	# insure that file name is not predictable.  This is for security to
-	# avoid "tmp race" attacks.  If more files are needed, create using
-	# the same form.
-
-	TEMP_FILE1=$(mktemp -q "${TEMP_DIR}/${PROGNAME}.$$.XXXXXX")
-	if [ "$TEMP_FILE1" = "" ]; then
-		error_exit "cannot create temp file!"
-	fi
+    TEMP_FILE1=$(mktemp -q "${TEMP_DIR}/${PROGNAME}.$$.XXXXXX")
+    if [ "$TEMP_FILE1" = "" ]; then
+        error_exit "cannot create temp file!"
+    fi
 }
 
 
 function usage
 {
+    #  -----------------------------------------------------------------------
+    #  Function to display usage message (does not exit)
+    #    No arguments
+    #  -----------------------------------------------------------------------
 
-#	-----------------------------------------------------------------------
-#	Function to display usage message (does not exit)
-#		No arguments
-#	-----------------------------------------------------------------------
-
-	  echo "Usage: ${PROGNAME} [ -h | --help ] [ -b | -c | -e | -g | -G | -l | -s | -H ] output_directory"
+    echo "Usage: ${PROGNAME} [ -h | --help ] [ -b | -c | -e | -g | -G | -l | -s | -H ] output_directory"
 }
 
 
 function helptext
 {
+    #  -----------------------------------------------------------------------
+    #  Function to display help message for program
+    #    No arguments
+    #  -----------------------------------------------------------------------
 
-#	-----------------------------------------------------------------------
-#	Function to display help message for program
-#		No arguments
-#	-----------------------------------------------------------------------
+    local tab=$(echo -en "  ")
 
-	local tab=$(echo -en "\t")
+    cat <<- -EOF-
+${PROGNAME} ver. ${VERSION}, ${AUTHOR}
+This is a program to create a LaTeX project from a template (Article, Exam or Beamer for now) and configure it with Git.
 
-	cat <<- -EOF-
-	${PROGNAME} ver. ${VERSION}, ${AUTHOR}
-	This is a program to create a LaTeX project from a template (Article, Exam or Beamer for now) and configure it with Git.
+$(usage)
 
-	$(usage)
+Options:
 
-	Options:
+$tab -h, --help
+$tab$tab Display this help message and exit.
 
-	-h, --help
-$tab Display this help message and exit.
+$tab -b output_directory
+$tab$tab Specify the output directory of the Beamer project. Create it if not existing.
 
-	-b output_directory
-$tab Specify the output directory of the Beamer project. Create it if not existing.
+$tab -c output_directory
+$tab$tab Specify the output directory of the Cours project. Create it if not existing.
 
-	-c output_directory
-$tab Specify the output directory of the Cours project. Create it if not existing.
+$tab -e output_directory
+$tab$tab Specify the output directory of the Exam project. Create it if not existing.
 
-	-e output_directory
-$tab Specify the output directory of the Exam project. Create it if not existing.
+$tab -g output_directory
+$tab$tab Add LaTeX .gitignore file to the output directory. Create it if not existing.
 
-	-g output_directory
-$tab Add LaTeX .gitignore file to the output directory. Create it if not existing.
+$tab -G output_directory
+$tab$tab Add .gitlab-ci.yml file to the output directory. Create it if not existing.
 
-	-G output_directory
-$tab Add .gitlab-ci.yml file to the output directory. Create it if not existing.
+$tab -l output_directory
+$tab$tab Add .latexmkrc file to the output directory. Create it if not existing.
 
-	-l output_directory
-$tab Add .latexmkrc file to the output directory. Create it if not existing.
+$tab -s output_directory
+$tab$tab Add style/ submodule to the output directory. Create it if not existing.
 
-	-s output_directory
-$tab Add style/ submodule to the output directory. Create it if not existing.
-
-	-H output_directory
-$tab Add gitinfo2 hook files to the output directory. Create it if not existing.
+$tab -H output_directory
+$tab$tab Add gitinfo2 hook files to the output directory. Create it if not existing.
 -EOF-
 }
 
@@ -191,28 +182,28 @@ function check_output
 {
     OUTPUT=$1
     if [ "${OUTPUT}" = "" ]; then
-	error_exit "You must specify an output directory"
+        error_exit "You must specify an output directory"
     fi
     if [ ! -d ${TEMPLATE_DIR} ]; then
-	error_exit "The specified template directory ${TEMPLATE_DIR} does not exist"
+        error_exit "The specified template directory ${TEMPLATE_DIR} does not exist"
     fi
     if [ ! -d ${OUTPUT} ]; then
         mkdir -p ${OUTPUT} || error_exit "The output directory $1 can not be created"
     else
         if [ ! -w ${OUTPUT} ]; then
-	    error_exit "The specified output directory $1 is not writable"
-	fi
+            error_exit "The specified output directory $1 is not writable"
+        fi
     fi
 }
 
 function create_project
 {
-#	-----------------------------------------------------------------------
-#	Function to create the project from the template
-    #		Accepts 2 arguments:
-    #			$1 = output directory
+    #  -----------------------------------------------------------------------
+    #  Function to create the project from the template
+    #    Accepts 2 arguments:
+    #      $1 = output directory
     #     $2 = project type [cours, exam, beamer]
-    #	-----------------------------------------------------------------------
+    #  -----------------------------------------------------------------------
     OUTPUT=$1
     check_output $OUTPUT
     case $2 in
@@ -227,11 +218,11 @@ function create_project
 
 function add_gitinfo2_hook
 {
-    #	-----------------------------------------------------------------------
-    #	Function to add the gitinfo2hook file to .post-checkout
-    #		Accepts 1 argument:
-    #			output directory
-    #	-----------------------------------------------------------------------
+    #  -----------------------------------------------------------------------
+    #  Function to add the gitinfo2hook file to .post-checkout
+    #    Accepts 1 argument:
+    #      output directory
+    #  -----------------------------------------------------------------------
     GITINFO2_HOOKFILE=/usr/share/doc/texlive-doc/latex/gitinfo2/post-xxx-sample.txt
     if [ -f ${GITINFO2_HOOKFILE} ]
     then
@@ -254,11 +245,11 @@ function add_gitinfo2_hook
 
 function add_gitlab_ci
 {
-    #	-----------------------------------------------------------------------
-    #	Function to add the gitlab CI/CD configuration file to the project followed by Git
-    #		Accepts 1 argument:
-    #			output directory
-    #	-----------------------------------------------------------------------
+    #  -----------------------------------------------------------------------
+    #  Function to add the gitlab CI/CD configuration file to the project followed by Git
+    #    Accepts 1 argument:
+    #      output directory
+    #  -----------------------------------------------------------------------
     OUTPUT=$1
     check_output $OUTPUT
     pushd ${OUTPUT}
@@ -296,11 +287,11 @@ EOF
 
 function add_latexmkrc
 {
-    #	-----------------------------------------------------------------------
-    #	Function to add the Latexmk configuration file to the project followed by Git
-    #		Accepts 1 argument:
-    #			output directory
-    #	-----------------------------------------------------------------------
+    #  -----------------------------------------------------------------------
+    #  Function to add the Latexmk configuration file to the project followed by Git
+    #    Accepts 1 argument:
+    #      output directory
+    #  -----------------------------------------------------------------------
     OUTPUT=$1
     check_output $OUTPUT
     pushd ${OUTPUT}
@@ -343,11 +334,11 @@ EOF
 
 function add_gitignore
 {
-    #	-----------------------------------------------------------------------
-    #	Function to add the .gitignore configuration file to the project followed by Git
-    #		Accepts 1 argument:
-    #			output directory
-    #	-----------------------------------------------------------------------
+    #  -----------------------------------------------------------------------
+    #  Function to add the .gitignore configuration file to the project followed by Git
+    #    Accepts 1 argument:
+    #      output directory
+    #  -----------------------------------------------------------------------
     OUTPUT=$1
     check_output $OUTPUT
     pushd ${OUTPUT}
@@ -436,11 +427,11 @@ EOF
 
 function add_submodule_style
 {
-    #	-----------------------------------------------------------------------
-    #	Function to add to current project the style sheet submodule
-    #		Accepts 1 arguments:
-    #			output directory
-    #	-----------------------------------------------------------------------
+    #  -----------------------------------------------------------------------
+    #  Function to add to current project the style sheet submodule
+    #    Accepts 1 arguments:
+    #      output directory
+    #  -----------------------------------------------------------------------
     OUTPUT=$1
     check_output $OUTPUT
     pushd ${OUTPUT}
@@ -461,11 +452,11 @@ function add_submodule_style
 
 function make_project_git_tracked
 {
-    #	-----------------------------------------------------------------------
-    #	Function to make the project followed by Git
-    #		Accepts 1 arguments:
-    #			output directory
-    #	-----------------------------------------------------------------------
+    #  -----------------------------------------------------------------------
+    #  Function to make the project followed by Git
+    #    Accepts 1 arguments:
+    #      output directory
+    #  -----------------------------------------------------------------------
     OUTPUT=$1
     check_output $OUTPUT
     pushd ${OUTPUT}
@@ -478,9 +469,9 @@ function make_project_git_tracked
     popd
 }
 
-#	-------------------------------------------------------------------
-#	Program starts here
-#	-------------------------------------------------------------------
+#  -------------------------------------------------------------------
+#  Program starts here
+#  -------------------------------------------------------------------
 
 ##### Initialization And Setup #####
 
@@ -502,20 +493,20 @@ make_temp_files
 ##### Command Line Processing #####
 
 if [ "$1" = "--help" ]; then
-	helptext
-	graceful_exit
+    helptext
+    graceful_exit
 fi
 
 while getopts ":hb:c:e:g:G:l:s:H:" opt; do
-	  case $opt in
-	      b )	create_project $OPTARG beamer
-		        make_project_git_tracked $OPTARG
+    case $opt in
+        b ) create_project $OPTARG beamer
+            make_project_git_tracked $OPTARG
             ;;
-	      c ) create_project $OPTARG cours
-		        make_project_git_tracked $OPTARG
+        c ) create_project $OPTARG cours
+            make_project_git_tracked $OPTARG
             ;;
-	      e )	create_project $OPTARG exam
-		        make_project_git_tracked $OPTARG
+        e ) create_project $OPTARG exam
+            make_project_git_tracked $OPTARG
             ;;
         g ) add_gitignore $OPTARG
             ;;
@@ -527,13 +518,12 @@ while getopts ":hb:c:e:g:G:l:s:H:" opt; do
             ;;
         H ) add_gitinfo2_hook $OPTARG
             ;;
-	      h )	helptext
+        h ) helptext
             ;;
-	      * )	usage
-		        clean_up
-		        exit 1
-	esac
+        * ) usage
+            clean_up
+            exit 1
+    esac
 done
 
 graceful_exit
-
