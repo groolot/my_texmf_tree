@@ -136,7 +136,7 @@ function usage
 #		No arguments
 #	-----------------------------------------------------------------------
 
-	  echo "Usage: ${PROGNAME} [ -h | --help ] [ -b | -c | -e | -g | -G | -l ] output_directory"
+	  echo "Usage: ${PROGNAME} [ -h | --help ] [ -b | -c | -e | -g | -G | -l | -s ] output_directory"
 }
 
 
@@ -178,6 +178,9 @@ $tab Add .gitlab-ci.yml file to the output directory. Create it if not existing.
 
 	-l output_directory
 $tab Add .latexmkrc file to the output directory. Create it if not existing.
+
+	-s output_directory
+$tab Add style/ submodule to the output directory. Create it if not existing.
 -EOF-
 }
 
@@ -407,28 +410,43 @@ EOF
     popd
 }
 
-function make_project_git_tracked
+function add_submodule_style
 {
-#	-----------------------------------------------------------------------
-#	Function to make the project followed by Git
-#		Accepts 1 argument:
-#			output directory
-#	-----------------------------------------------------------------------
+    #	-----------------------------------------------------------------------
+    #	Function to add to current project the style sheet submodule
+    #		Accepts 1 arguments:
+    #			output directory
+    #	-----------------------------------------------------------------------
     OUTPUT=$1
     check_output $OUTPUT
     pushd ${OUTPUT}
     git init
-    GITINFO2_HOOKFILE=/usr/share/doc/texlive-doc/latex/gitinfo2/post-xxx-sample.txt
-    cp ${GITINFO2_HOOKFILE} .git/hooks/post-checkout
-    cp ${GITINFO2_HOOKFILE} .git/hooks/post-commit
-    cp ${GITINFO2_HOOKFILE} .git/hooks/post-merge
-    chmod a+x .git/hooks/post-*
-    git submodule add https://framagit.org/groolot/style.git style
-    git add style
-    git commit -m "Import initial et utilisation du sous mmodule de style"
-    pushd style
-    git remote set-url --push origin git@framagit.org:groolot/style.git
+    echo "Choisir le dépôt distant pour les feuilles de style"
+    select repository in https://framagit.org/groolot/style.git https://gitlab.bts-malraux72.net/enseignants/style.git
+    do
+        git submodule add ${repository} style
+        git add style
+        git commit -m "Import initial et utilisation du sous mmodule de style"
+        pushd style
+        git remote set-url --push origin $(echo $repository | sed -e 's#https://#git@#' -e 's#/#:#')
+        popd
+        break
+    done
     popd
+}
+
+function make_project_git_tracked
+{
+    #	-----------------------------------------------------------------------
+    #	Function to make the project followed by Git
+    #		Accepts 1 arguments:
+    #			output directory
+    #	-----------------------------------------------------------------------
+    OUTPUT=$1
+    check_output $OUTPUT
+    pushd ${OUTPUT}
+    git init
+    add_submodule_style .
     add_gitignore .
     add_latexmkrc .
     add_gitlab_ci .
@@ -463,7 +481,7 @@ if [ "$1" = "--help" ]; then
 	graceful_exit
 fi
 
-while getopts ":hb:c:e:g:G:l:" opt; do
+while getopts ":hb:c:e:g:G:l:s:" opt; do
 	  case $opt in
 	      b )	create_project $OPTARG beamer
 		        make_project_git_tracked $OPTARG
@@ -479,6 +497,8 @@ while getopts ":hb:c:e:g:G:l:" opt; do
         G ) add_gitlab_ci $OPTARG
             ;;
         l ) add_latexmkrc $OPTARG
+            ;;
+        s ) add_submodule_style $OPTARG
             ;;
 	      h )	helptext
             ;;
